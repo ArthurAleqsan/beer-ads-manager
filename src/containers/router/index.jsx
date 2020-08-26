@@ -2,7 +2,7 @@ import React from 'react';
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { withRouter, Switch, Route } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import VideoRedactor from './pages/VideoRedactor';
+import VideoRedactor from '../pages/VideoRedactor';
 
 const MainRouter = () => {
     const collapsed = useSelector(s => s.global.collapsed);

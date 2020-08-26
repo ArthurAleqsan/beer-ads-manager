@@ -59,6 +59,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "antd": "^4.6.1",
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.5",
     "i": "^0.3.6",

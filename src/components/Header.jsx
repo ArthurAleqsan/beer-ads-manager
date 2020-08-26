@@ -15,7 +15,7 @@ const Header = () => {
         console.log('download');
     }
     return (
-        <div className='recorder-header'>
+        <div className='recorder-header main-content'>
             <div className='recorder-header-left-row'>
                 <img src='/assets/images/icons/down.svg' className='basic-icon' onClick={handleCollapse} />
                 <span className = 'header-title'>Создать видео</span>
