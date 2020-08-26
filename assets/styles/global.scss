@@ -1,0 +1,20 @@
+$BG_Color: #f7fafc;
+$hero-yellow: #FBD436;
+
+:root {
+    --BG_Color: #{$BG_Color};
+    --hero-yellow: #{$hero-yellow};
+}
+.main-container {
+    display: flex;
+    background: $BG_Color;
+    .pro-sidebar {
+        height: 100vh;
+        .pro-sidebar-inner {
+            // background: #fff;
+        }
+    }
+}
+.basic-icon {
+    cursor: pointer;
+}

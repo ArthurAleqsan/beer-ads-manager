@@ -1,10 +1,19 @@
 import * as types from './../types';
 
-const initialState = {};
+const initialState = {
+    collapsed: false,
+};
 
-export const globalReducer = (state = initialState, action) => {
+const globalReducer = (state = initialState, action) => {
     switch (action.type) {
+        case types.COLLAPSED:
+            return {
+                ...state,
+                collapsed: action.status
+            }
         default:
             return state
     }
-}
+};
+
+export default globalReducer;
