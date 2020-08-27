@@ -21,4 +21,42 @@
             }
         }
     }
+    .redactor-navigation {
+        margin: 16px $redactor-content-padding;
+        .header-nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 48px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #3098f2;
+            .icon {
+                width: 21px;
+                height: 20px;
+                margin-right: 12px;
+            }
+            span {
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 23px;
+                color: #3098f2;
+            }
+        }
+        .active-nav {
+            background-color: #3098f2;
+            span {
+                color: #fff;
+            }
+        }
+    }
+    .redactor-content {
+        padding: 0 $redactor-content-padding;
+    }
+    .price-container-content {
+        .yellow-btn {
+            height: 48px;
+            padding: 0 27px;
+        }
+    }
 }

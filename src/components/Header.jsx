@@ -22,7 +22,7 @@ const Header = () => {
             </div>
             <div className='recorder-header-right-row'>
                 <button className = 'btn save-btn' onClick = {handleSave}>Сохранить</button>
-                <button className = 'btn download-btn' onClick = {handlDownload}>Скачать</button>
+                <button className = 'btn download-btn yellow-btn' onClick = {handlDownload}>Скачать</button>
             </div>
         </div>
     )

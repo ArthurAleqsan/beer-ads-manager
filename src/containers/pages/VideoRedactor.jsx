@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Redactor from '../../components/Redactor';
 
 const VideoRedactor = () => {
+    
     return (
         <div className='video-redactor-container'>
             <Header />

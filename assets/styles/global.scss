@@ -1,5 +1,6 @@
 $BG_Color: #f7fafc;
 $hero-yellow: #fbd436;
+$redactor-content-padding: 12px;
 
 :root {
     --BG_Color: #{$BG_Color};
@@ -21,4 +22,16 @@ $hero-yellow: #fbd436;
 }
 .main-content {
     padding: 0 35px;
+}
+.btn {
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+}
+.yellow-btn {
+    background: $hero-yellow;
+    border: unset;
 }

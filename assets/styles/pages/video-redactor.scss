@@ -23,11 +23,6 @@
             .btn {
                 width: 150px;
                 height: 48px;
-                cursor: pointer;
-                border-radius: 4px;
-                font-weight: 500;
-                font-size: 20px;
-                line-height: 23px;
             }
             .save-btn {
                 background-color: #ffffff;
@@ -35,8 +30,6 @@
             }
             .download-btn {
                 margin-left: 24px;
-                background: $hero-yellow;
-                border: unset;
             }
         }
     }
