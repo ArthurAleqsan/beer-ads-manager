@@ -2,6 +2,9 @@ import * as types from './../types';
 
 const initialState = {
     collapsed: false,
+    tvCount: 2,
+    videoContentRows: null,
+    duration: '00:00:00',
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -10,6 +13,11 @@ const globalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 collapsed: action.status
+            }
+        case types.SET_STORE_VALUE:
+            return {
+                ...state,
+                [action.name]: action.value,
             }
         default:
             return state

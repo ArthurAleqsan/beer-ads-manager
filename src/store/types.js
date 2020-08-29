@@ -1,1 +1,2 @@
 export const COLLAPSED = 'COLLAPSED';
+export const SET_STORE_VALUE = 'SET_STORE_VALUE';

@@ -38,10 +38,25 @@
         }
         .timeline-content {
             background: #fff;
+            position: relative;
             .video-timeline {
                 border-bottom: 1px solid #e5e5e5;
             }
+            .blue-dashed {
+                transform: rotate(-90deg);
+                position: absolute;
+                top: 80px;
+                background: #fff;
+                color: #3098f2;
+                border: 1px dashed #3098f2;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 24px;
+                border-radius: 4px;
+                padding: 3px 25px;
+                left: -30px;
+                cursor: pointer;
+            }
         }
-        
     }
 }
