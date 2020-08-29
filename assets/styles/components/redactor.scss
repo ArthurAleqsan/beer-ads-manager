@@ -101,9 +101,27 @@
                 background: unset;
             }
             &::-webkit-scrollbar-thumb {
-                background-color: #4C4C4C;
+                background-color: #4c4c4c;
                 border-radius: 5px;
-    
+            }
+            .video-container {
+                position: relative;
+                .video-bottom-container {
+                    position: absolute;
+                    bottom: 0;
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+                    align-items: center;
+                    img {
+                        width: 15px;
+                        padding-left: 2px;
+                    }
+                    span {
+                        background: #000;
+                        color: #fff;
+                    }
+                }
             }
         }
     }
