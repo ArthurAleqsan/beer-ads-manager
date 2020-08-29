@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'antd';
 import RedactorPriceContent from './common/RedactorPriceContent';
+import RedactorMediaCondtent from './common/RedactorMediaCondtent';
 
 
 
@@ -17,10 +18,10 @@ const Redactor = () => {
             redactorBody = <RedactorPriceContent />;
             break;
         case 'img':
-            redactorBody = <RedactorPriceContent />;
+            redactorBody = <RedactorMediaCondtent isImgType />;
             break;
         case 'video':
-            redactorBody = <RedactorPriceContent />;
+            redactorBody = <RedactorMediaCondtent />;
             break;
     }
 

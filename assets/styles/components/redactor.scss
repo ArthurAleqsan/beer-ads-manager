@@ -74,9 +74,39 @@
             width: 450px;
             margin-top: 24px;
         }
-
     }
-
+    .media-container-content {
+        .dragger-text-container {
+            display: flex;
+            flex-direction: column;
+            color: #999999;
+            font-size: 12px;
+            line-height: 16px;
+            :first-child {
+                color: #333;
+                font-size: 14px;
+                line-height: 25px;
+            }
+        }
+        .media-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-height: 350px;
+            overflow: auto;
+            padding: 0 5px 12px 0;
+            margin-top: 12px;
+            &::-webkit-scrollbar {
+                width: 4px;
+                background: unset;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: #4C4C4C;
+                border-radius: 5px;
+    
+            }
+        }
+    }
 }
 .option-content {
     display: flex;
