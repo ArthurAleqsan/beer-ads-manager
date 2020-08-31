@@ -60,6 +60,12 @@
                 left: -10px;
                 cursor: pointer;
             }
+            .timeline-row-item {
+                width: 120px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 }

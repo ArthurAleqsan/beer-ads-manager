@@ -1,7 +1,6 @@
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import { Row, Col } from 'antd';
 import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
-import moment from 'moment';
 
 import { setStoreValue, addNewRow, changeRowContent } from '../store/global/global.actions';
 import SecondsInput from './common/SecondsInput';
@@ -12,13 +11,12 @@ const TimeLine = () => {
     const fake_tvCounts = ['tv-1', 'tv-2'];
     const contentRef = useRef();
     const [lineHeight, setLineHeight] = useState(190);
+    const [buttonLeftStyle, setButtonLeftStyle] = useState(-10);
     const { tvCount, videoContentRows, duration } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
     const { getState } = useStore();
     const [contentRow, setContentRow] = useState({
-        obj_1: null,
-        obj_2: null,
-        obj_3: null,
+        tv_s: ['tv-1', 'tv-2'],
         dur: 60,
         id: 1,
     });
@@ -28,6 +26,7 @@ const TimeLine = () => {
     });
 
     const handleAdd = () => {
+        setButtonLeftStyle(buttonLeftStyle + 120);
         if (videoContentRows) {
             addNewRow(dispatch, { ...contentRow, id: videoContentRows[videoContentRows.length - 1].id + 1 });
             dispatch(setStoreValue('duration', getTimeValuefromDuration(getDurationSeconds(duration) + 60)));
@@ -58,10 +57,12 @@ const TimeLine = () => {
                     </div>)}
                 </Col>
                 <Col span={22} className='timeline-content'>
-                    {fake_tvCounts.map((_, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
-
+                    {fake_tvCounts.map((row, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
+                        {videoContentRows && videoContentRows.map((r, j) => {
+                            return <div key={i * j} className='timeline-row-item'>{r.tv_s[i]}</div>
+                        })}
                     </Row>)}
-                    <button className='blue-dashed' onClick={handleAdd}>+ Добавить слайд</button>
+                    <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle }}>+ Добавить слайд</button>
                 </Col>
             </Row>
         </div>
