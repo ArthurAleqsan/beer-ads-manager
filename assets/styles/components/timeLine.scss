@@ -18,6 +18,9 @@
             font-size: 16px;
             line-height: 24px;
         }
+        .rows-timeline {
+            display: flex;
+        }
     }
     .timeline-body {
         height: calc(100% - 30px);
@@ -54,9 +57,42 @@
                 line-height: 24px;
                 border-radius: 4px;
                 padding: 3px 25px;
-                left: -30px;
+                left: -10px;
                 cursor: pointer;
             }
+        }
+    }
+}
+.seconds-input {
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    .time-container {
+        display: flex;
+        justify-content: center;
+        input {
+            background: unset;
+            border: unset;
+            text-align: right;
+        }
+    }
+    .arrow-buttons-container {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        img {
+            width: 10px;
+            cursor: pointer;
         }
     }
 }

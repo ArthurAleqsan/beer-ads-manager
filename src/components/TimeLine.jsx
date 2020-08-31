@@ -1,7 +1,12 @@
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import { Row, Col } from 'antd';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { setStoreValue } from '../store/global/global.actions';
+import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
+import moment from 'moment';
+
+import { setStoreValue, addNewRow, changeRowContent } from '../store/global/global.actions';
+import SecondsInput from './common/SecondsInput';
+import { getTimeValuefromDuration, getDurationSeconds } from '../util/helpers';
+
 
 const TimeLine = () => {
     const fake_tvCounts = ['tv-1', 'tv-2'];
@@ -9,26 +14,40 @@ const TimeLine = () => {
     const [lineHeight, setLineHeight] = useState(190);
     const { tvCount, videoContentRows, duration } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
+    const { getState } = useStore();
     const [contentRow, setContentRow] = useState({
         obj_1: null,
         obj_2: null,
         obj_3: null,
-        dur: null,
-        id: null,
+        dur: 60,
+        id: 1,
     });
     useLayoutEffect(() => {
         const o_H = contentRef.current.offsetHeight;
         tvCount && setLineHeight(o_H / tvCount);
     });
+
     const handleAdd = () => {
-        dispatch(setStoreValue('videoContentRows', contentRow));
+        if (videoContentRows) {
+            addNewRow(dispatch, { ...contentRow, id: videoContentRows[videoContentRows.length - 1].id + 1 });
+            dispatch(setStoreValue('duration', getTimeValuefromDuration(getDurationSeconds(duration) + 60)));
+        } else {
+            dispatch(setStoreValue('videoContentRows', [contentRow]));
+            dispatch(setStoreValue('duration', getTimeValuefromDuration(60)));
+        }
     };
+
     return (
         <div className='player-timeline'>
             <Row className='timeline-header'>
                 <Col span={2} className='total-time'>{duration}</Col>
-                <Col span={22} >
-                    {videoContentRows.map(item => <span></span>)}
+                <Col span={22} className='rows-timeline'>
+                    {videoContentRows && videoContentRows.map(item => {
+                        return <SecondsInput
+                            key={item.id}
+                            data={item}
+                        />
+                    })}
                 </Col>
             </Row>
             <Row className='timeline-body' ref={contentRef}>
@@ -42,7 +61,7 @@ const TimeLine = () => {
                     {fake_tvCounts.map((_, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
 
                     </Row>)}
-                    <button className='blue-dashed' onClick={() => console.log('object')}>+ Добавить слайд</button>
+                    <button className='blue-dashed' onClick={handleAdd}>+ Добавить слайд</button>
                 </Col>
             </Row>
         </div>

@@ -19,6 +19,16 @@ const globalReducer = (state = initialState, action) => {
                 ...state,
                 [action.name]: action.value,
             }
+        case types.ADD_NEW_ROW:
+            return {
+                ...state,
+                videoContentRows: [...state.videoContentRows, action.row],
+            }
+        case types.ROW_CHANGED:
+            return {
+                ...state,
+                videoContentRows: action.newRows,
+            }
         default:
             return state
     }
