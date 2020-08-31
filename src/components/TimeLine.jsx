@@ -16,7 +16,7 @@ const TimeLine = () => {
     const dispatch = useDispatch();
     const { getState } = useStore();
     const [contentRow, setContentRow] = useState({
-        tv_s: ['tv-1', 'tv-2'],
+        tv_s: new Array(fake_tvCounts.length),
         dur: 60,
         id: 1,
     });
@@ -59,7 +59,18 @@ const TimeLine = () => {
                 <Col span={22} className='timeline-content'>
                     {fake_tvCounts.map((row, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
                         {videoContentRows && videoContentRows.map((r, j) => {
-                            return <div key={i * j} className='timeline-row-item'>{r.tv_s[i]}</div>
+                            console.log(r.tv_s[i]);
+                            if (!r.tv_s[i]) {
+                                return <div key={i * j} className='timeline-row-item'>
+                                    <div className ='empty-content-container'>
+                                        <img src='/assets/images/icons/add.svg' />
+                                        <span>Перетащите</span>
+                                        <span>сюда</span>
+                                    </div>
+                                </div>
+                            } else {
+                                return <div key={i * j} className='timeline-row-item'>{r.tv_s[i]}</div>
+                            }
                         })}
                     </Row>)}
                     <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle }}>+ Добавить слайд</button>
