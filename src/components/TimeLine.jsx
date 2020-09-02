@@ -5,6 +5,7 @@ import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 import { setStoreValue, addNewRow, changeRowContent } from '../store/global/global.actions';
 import SecondsInput from './common/SecondsInput';
 import { getTimeValuefromDuration, getDurationSeconds } from '../util/helpers';
+import Dustbin from './common/DND/Dustbin';
 
 
 const TimeLine = () => {
@@ -59,15 +60,16 @@ const TimeLine = () => {
                 <Col span={22} className='timeline-content'>
                     {fake_tvCounts.map((row, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
                         {videoContentRows && videoContentRows.map((r, j) => {
-                            console.log(r.tv_s[i]);
                             if (!r.tv_s[i]) {
-                                return <div key={i * j} className='timeline-row-item'>
-                                    <div className ='empty-content-container'>
-                                        <img src='/assets/images/icons/add.svg' />
-                                        <span>Перетащите</span>
-                                        <span>сюда</span>
+                                return <Dustbin allowedDropEffect="copy" key={i * j} contentRow={contentRow}>
+                                    <div className='timeline-row-item'>
+                                        <div className='empty-content-container'>
+                                            <img src='/assets/images/icons/add.svg' />
+                                            <span>Перетащите</span>
+                                            <span>сюда</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </Dustbin>
                             } else {
                                 return <div key={i * j} className='timeline-row-item'>{r.tv_s[i]}</div>
                             }

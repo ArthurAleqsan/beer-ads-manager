@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Upload, message } from 'antd';
 import { getUploadProps } from '../helpers';
 import MediaContainer from './MediaContainer';
+import Box from './DND/Box';
 
 const { Dragger } = Upload;
 
@@ -35,7 +36,6 @@ const fakeImages = [
 ];
 
 const RedactorMediaCondtent = ({ isImgType }) => {
-    console.log(isImgType);
     const props = getUploadProps();
     return (
         <div className='media-container-content redactor-content'>
@@ -46,9 +46,9 @@ const RedactorMediaCondtent = ({ isImgType }) => {
                     <span>Поддерживаются {isImgType ? 'изображения:*.jpg, *.png.' : 'видео:*.mp4, *.mov'}</span>
                 </div>
             </Dragger>
-            <div className = 'media-content'>
+            <div className='media-content'>
                 {fakeImages.map(media => {
-                    return <MediaContainer key = {media.id} file = {media} isImg = {isImgType} />
+                    return <Box key={media.id}><MediaContainer file={media} isImg={isImgType} /></Box>
                 })}
             </div>
         </div>
