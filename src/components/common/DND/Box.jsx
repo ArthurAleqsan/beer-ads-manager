@@ -2,8 +2,9 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
-const Box = ({ isDragging, connectDragSource, children }) => {
-  const opacity = isDragging ? 0.4 : 1
+const Box = ({ isDragging, connectDragSource, children, file }) => {
+  const opacity = isDragging ? 0.4 : 1;
+  console.log(file);
   return connectDragSource(<div style={{ opacity }}>{children}</div>)
 }
 export default DragSource(
@@ -11,9 +12,9 @@ export default DragSource(
   {
     beginDrag: (props) => ({ name: props.name }),
     endDrag(props, monitor) {
-      const item = monitor.getItem()
+      const item = monitor.getItem();
       const dropResult = monitor.getDropResult();
-      console.log(dropResult);
+      console.log(item);
       if (dropResult) {
         let alertMessage = ''
         const isDropAllowed =

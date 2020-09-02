@@ -48,7 +48,7 @@ const RedactorMediaCondtent = ({ isImgType }) => {
             </Dragger>
             <div className='media-content'>
                 {fakeImages.map(media => {
-                    return <Box key={media.id}><MediaContainer file={media} isImg={isImgType} /></Box>
+                    return <Box key={media.id} file = {media}><MediaContainer file={media} isImg={isImgType} /></Box>
                 })}
             </div>
         </div>
