@@ -1,8 +1,8 @@
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import { Row, Col } from 'antd';
-import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
-import { setStoreValue, addNewRow, changeRowContent } from '../store/global/global.actions';
+import { setStoreValue, addNewRow } from '../store/global/global.actions';
 import SecondsInput from './common/SecondsInput';
 import { getTimeValuefromDuration, getDurationSeconds } from '../util/helpers';
 import DropTarget from './common/D_D/DropTarget';
@@ -15,13 +15,11 @@ const TimeLine = () => {
     const [buttonLeftStyle, setButtonLeftStyle] = useState(-10);
     const { tvCount, videoContentRows, duration } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
-    const { getState } = useStore();
-    const [contentRow, setContentRow] = useState({
+    const contentRow = {
         tv_s: new Array(fake_tvCounts.length),
         dur: 60,
         id: 1,
-    });
-    // const [f, setFile] = useState(null);
+    };
     useLayoutEffect(() => {
         const o_H = contentRef.current.offsetHeight;
         tvCount && setLineHeight(o_H / tvCount);
@@ -84,7 +82,7 @@ const TimeLine = () => {
                             } else {
                                 // console.log(`${i + 1}_${j + 1}`);
                                 return <div key={i * j} className='timeline-row-item'>
-                                    <img src={r.tv_s[i]} />
+                                    <img src={r.tv_s[i].url} />
                                 </div>
                             }
                         })}

@@ -7,25 +7,24 @@ import { addItemToTimelineBox } from "../../../store/global/global.actions";
 const insideStyle = {
     backgroundColor: "#cccccc",
     opacity: 0.5,
+    width: 100,
 };
 
 const DropTarget = props => {
     const [isOver, setIsOver] = useState(false);
     const dispatch = useDispatch();
     const {getState} = useStore();
-    const [selectedId, setSelectedId] = useState(null);
     const dragOver = ev => {
         ev.preventDefault();
         ev.dataTransfer.dropEffect = props.dropEffect;
     };
 
     const drop = (ev, id) => {
-        const droppedItem = ev.dataTransfer.getData("drag-item");
-        console.log(id);
-
+        const droppedItem = JSON.parse(ev.dataTransfer.getData("drag-item"));
         if (droppedItem) {
             props.onItemDropped(droppedItem);
         }
+        console.log(droppedItem);
         addItemToTimelineBox(dispatch, getState, droppedItem, id);
         setIsOver(false);
     };
@@ -45,7 +44,6 @@ const DropTarget = props => {
             onDragLeave={dragLeave}
             style={{ display: 'flex', ...(isOver ? insideStyle : {}) }}
             id= {props.id}
-            // onClick = {() => setSelectedId(props.id)}
         >
             {props.children}
         </div>

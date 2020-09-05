@@ -26,7 +26,6 @@ export const changeRowContent = (dispatch, getState, key, value, id) => {
     const { videoContentRows: rows } = getState().global;
     if (key == 'dur') {
         const duration = getTimeValuefromDuration(value);
-        console.log(duration)
         dispatch(setStoreValue('duration', duration));
     }
     let newRows = [...rows];
@@ -44,6 +43,8 @@ export const addItemToTimelineBox = (dispatch, getState, item, id) => {
     const rowId = splitedId[1];
     let newRows = [...rows];
     const rowItem = newRows.find(r => r.id == rowId);
+    console.log(rowItem.tv_s)
+
     const newTv_s = rowItem.tv_s.splice(colId - 1, 1, item);
     console.log(newTv_s)
     newRows = updateInArray(newRows, item => item.id == id, () => rowItem);

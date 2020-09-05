@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import * as dropEffects from "./dropEffects";
-import { addItemToTimelineBox } from "../../../store/global/global.actions";
-import { useDispatch, useStore } from "react-redux";
 
 const draggingStyle = {
     opacity: 0.25,
@@ -11,27 +9,24 @@ const draggingStyle = {
 const Drag = props => {
     const [isDragging, setIsDragging] = useState(false);
     const image = useRef(null);
-    const dispatch = useDispatch();
-    const {getState} = useStore();
 
     useEffect(() => {
         image.current = null;
-        if (props.dragImage) {
+        if (props.dataItem.url) {
             image.current = new Image();
-            image.current.src = props.dragImage;
+            image.current.src = props.dataItem.url;
         }
     }, [props.dragImage]);
 
     const startDrag = ev => {
         setIsDragging(true);
-        console.log(props.dataItem);
-        ev.dataTransfer.setData("drag-item", props.dataItem);
+        console.log(props);
+        ev.dataTransfer.setData("drag-item", JSON.stringify(props.dataItem));
         ev.dataTransfer.effectAllowed = props.dropEffect;
         if (image.current) {
-            ev.dataTransfer.setDragImage(image.current, 0, 0);
+            image.current.width = '100px';
+            ev.dataTransfer.setDragImage(image.current, -100, -10);
         }
-         // addItemToTimelineBox(dispatch, getState, item.file.file, id, 0);
-        //  addItemToTimelineBox(dispatch, getState, props.dataItem)
     };
 
     const dragEnd = () => setIsDragging(false);

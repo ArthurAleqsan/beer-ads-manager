@@ -48,7 +48,11 @@ const RedactorMediaCondtent = ({ isImgType }) => {
             </Dragger>
             <div className='media-content'>
                 {fakeImages.map(media => {
-                    return <Drag key={media.id} dataItem={media.url} dragImage={media.url} dropEffect="copy"><MediaContainer file={media} isImg={isImgType} /></Drag>
+                    return <Drag 
+                    key={media.id} 
+                    dataItem={media} 
+                    dragImage={media.url} 
+                    dropEffect="copy"><MediaContainer file={media} isImg={isImgType} /></Drag>
                 })}
             </div>
         </div>
