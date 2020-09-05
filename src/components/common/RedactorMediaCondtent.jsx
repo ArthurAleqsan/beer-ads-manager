@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Upload, message } from 'antd';
 import { getUploadProps } from '../helpers';
 import MediaContainer from './MediaContainer';
-import Box from './DND/Box';
+import Drag from './D_D/Drag';
 
 const { Dragger } = Upload;
 
@@ -48,7 +48,7 @@ const RedactorMediaCondtent = ({ isImgType }) => {
             </Dragger>
             <div className='media-content'>
                 {fakeImages.map(media => {
-                    return <Box key={media.id} file = {media}><MediaContainer file={media} isImg={isImgType} /></Box>
+                    return <Drag key={media.id} dataItem={media.url} dragImage={media.url} dropEffect="copy"><MediaContainer file={media} isImg={isImgType} /></Drag>
                 })}
             </div>
         </div>

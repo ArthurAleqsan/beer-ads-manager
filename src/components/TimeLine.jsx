@@ -5,7 +5,7 @@ import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 import { setStoreValue, addNewRow, changeRowContent } from '../store/global/global.actions';
 import SecondsInput from './common/SecondsInput';
 import { getTimeValuefromDuration, getDurationSeconds } from '../util/helpers';
-import Dustbin from './common/DND/Dustbin';
+import DropTarget from './common/D_D/DropTarget';
 
 
 const TimeLine = () => {
@@ -21,6 +21,7 @@ const TimeLine = () => {
         dur: 60,
         id: 1,
     });
+    // const [f, setFile] = useState(null);
     useLayoutEffect(() => {
         const o_H = contentRef.current.offsetHeight;
         tvCount && setLineHeight(o_H / tvCount);
@@ -36,6 +37,10 @@ const TimeLine = () => {
             dispatch(setStoreValue('duration', getTimeValuefromDuration(60)));
         }
     };
+    const [items, setItems] = React.useState([]);
+   
+
+    const itemDropped = item => setItems([...items, item]);
 
     return (
         <div className='player-timeline'>
@@ -61,7 +66,13 @@ const TimeLine = () => {
                     {fake_tvCounts.map((row, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
                         {videoContentRows && videoContentRows.map((r, j) => {
                             if (!r.tv_s[i]) {
-                                return <Dustbin allowedDropEffect="copy" key={i * j} contentRow={contentRow}>
+                                // console.log(i);
+                                return <DropTarget
+                                    onItemDropped={itemDropped}
+                                    dropEffect="copy"
+                                    key={i * j}
+                                    id={`${i + 1}_${j + 1}`}
+                                >
                                     <div className='timeline-row-item'>
                                         <div className='empty-content-container'>
                                             <img src='/assets/images/icons/add.svg' />
@@ -69,13 +80,16 @@ const TimeLine = () => {
                                             <span>сюда</span>
                                         </div>
                                     </div>
-                                </Dustbin>
+                                </DropTarget>
                             } else {
-                                return <div key={i * j} className='timeline-row-item'>{r.tv_s[i]}</div>
+                                // console.log(`${i + 1}_${j + 1}`);
+                                return <div key={i * j} className='timeline-row-item'>
+                                    <img src={r.tv_s[i]} />
+                                </div>
                             }
                         })}
                     </Row>)}
-                    <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle }}>+ Добавить слайд</button>
+                    <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle - 30}}>+ Добавить слайд</button>
                 </Col>
             </Row>
         </div>
