@@ -55,4 +55,29 @@ $redactor-content-padding: 12px;
         width: 12px;
     }
 }
-
+.main-footer {
+    background: #fff;
+    display: flex;
+    padding: 10px 0;
+    align-items: center;
+    font-size: 16px;
+    line-height: 24px;
+    .footer-left-col {
+        flex: 0.5;
+        display: flex;
+        justify-content: center;
+        span {
+            color: #999999;
+            margin-right: 3px;
+        }
+        a {
+            color: #333;
+        }
+    }
+    .footer-right-col {
+        .first-span {
+            color: #999999;
+            margin-right: 3px;
+        }
+    }
+}
