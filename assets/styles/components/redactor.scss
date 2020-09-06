@@ -1,9 +1,9 @@
-.redactor {
+.redactor, .videos-player {
     background: #ffffff;
     box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.08);
     border-radius: 4px;
     height: 635px;
-    .redactor-header {
+    .redactor-header, .videos-player-header {
         background: #e5e5e5;
         border-radius: 4px 4px 0px 0px;
         height: 32px;

@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import Redactor from '../../components/Redactor';
 import TimeLine from '../../components/TimeLine';
 import Footer from '../../components/Footer';
+import VideosPlayer from '../../components/VideosPlayer';
 
 
 const VideoRedactor = () => {
@@ -15,7 +16,9 @@ const VideoRedactor = () => {
             <Col span={10}>
                 <Redactor />
             </Col>
-            <Col span={10} offset={2}>aaaa</Col>
+            <Col span={13} offset={1}>
+                <VideosPlayer />
+            </Col>
         </Row>
         <TimeLine />
         <Footer />

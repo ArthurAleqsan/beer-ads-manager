@@ -66,13 +66,13 @@ const RedactorPriceContent = () => {
                 </Option>
             </Select>
             <div className='media-content'>
-                {fakeImages.map(media => {
+                {/* {fakeImages.map(media => {
                     return <Drag 
                     key={media.id} 
                     dataItem={media} 
                     dragImage={media.url} 
                     dropEffect="copy"><MediaContainer file={media} isImg={true} /></Drag>
-                })}
+                })} */}
             </div>
         </div>
     )
