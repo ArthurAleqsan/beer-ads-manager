@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RemoveBtn from './RemoveBtn';
+import RemoveItemPopup from '../popups/RemoveItemPopup';
 
 const MediaContainer = ({ isImg, file }) => {
     const { url, name, id } = file;
+    const [visibility, setVisibility] = useState(false);
     const handleRemove = () => {
         console.log('removed' + id);
+    };
+    const openRemoveModal = () => {
+        setVisibility(true);
+    };
+    const closeRemoveModal = () => {
+        setVisibility(false);
     };
 
     return (
@@ -20,8 +28,13 @@ const MediaContainer = ({ isImg, file }) => {
                     </div>
                 </div>
             }
-            <RemoveBtn handleRemove={handleRemove} />
+            <RemoveBtn handleRemove={openRemoveModal} />
             <div className='media-name-container'>{name}</div>
+            <RemoveItemPopup
+                visible={visibility}
+                handleCancel={closeRemoveModal}
+                handleRemove={handleRemove}
+            />
         </div>
     )
 };

@@ -7,13 +7,16 @@ import SecondsInput from './common/SecondsInput';
 import { getTimeValuefromDuration, getDurationSeconds } from '../util/helpers';
 import DropTarget from './common/D_D/DropTarget';
 import DropedItem from './common/DropedItem';
+import RemoveItemPopup from './popups/RemoveItemPopup';
 
 
 const TimeLine = () => {
     const fake_tvCounts = ['tv-1', 'tv-2'];
     const contentRef = useRef();
     const [lineHeight, setLineHeight] = useState(190);
-    const [buttonLeftStyle, setButtonLeftStyle] = useState(-10);
+    const [buttonLeftStyle, setButtonLeftStyle] = useState(-40);
+    const [visibility, setVisibility] = useState(false);
+    const [selectedId, setSelectedId] = useState(null);
     const { tvCount, videoContentRows, duration } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
     const { getState } = useStore();
@@ -42,8 +45,16 @@ const TimeLine = () => {
 
     const itemDropped = item => setItems([...items, item]);
 
-    const handleRemoveItem = (id) => {
-        changeItemToTimelineBox(dispatch, getState, null, id)
+    const handleRemoveItem = () => {
+        changeItemToTimelineBox(dispatch, getState, null, selectedId);
+        setVisibility(false);
+    };
+    const openRemoveModal = (id) => {
+        setSelectedId(id)
+        setVisibility(true);
+    };
+    const closeRemoveModal = () => {
+        setVisibility(false);
     };
 
     return (
@@ -89,15 +100,20 @@ const TimeLine = () => {
                                     <DropedItem
                                         type='image'
                                         obj={r.tv_s[i]}
-                                        handleRemove={() => handleRemoveItem(`${i + 1}_${j + 1}`)}
+                                        handleRemove={() => openRemoveModal(`${i + 1}_${j + 1}`)}
                                     />
                                 </div>
                             }
                         })}
                     </Row>)}
-                    <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle - 30 }}>+ Добавить слайд</button>
+                    <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle }}>+ Добавить слайд</button>
                 </Col>
             </Row>
+            <RemoveItemPopup 
+                visible = {visibility}
+                handleCancel = {closeRemoveModal}
+                handleRemove = {handleRemoveItem}
+            />
         </div>
     )
 };

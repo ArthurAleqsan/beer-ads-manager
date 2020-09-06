@@ -47,7 +47,7 @@ $redactor-content-padding: 12px;
     height: 25px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -55,3 +55,4 @@ $redactor-content-padding: 12px;
         width: 12px;
     }
 }
+

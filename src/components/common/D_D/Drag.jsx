@@ -20,12 +20,11 @@ const Drag = props => {
 
     const startDrag = ev => {
         setIsDragging(true);
-        console.log(props);
         ev.dataTransfer.setData("drag-item", JSON.stringify(props.dataItem));
         ev.dataTransfer.effectAllowed = props.dropEffect;
         if (image.current) {
-            image.current.width = '100px';
-            ev.dataTransfer.setDragImage(image.current, -100, -10);
+            image.current.width = 50;
+            ev.dataTransfer.setDragImage(image.current, 0, 0);
         }
     };
 
