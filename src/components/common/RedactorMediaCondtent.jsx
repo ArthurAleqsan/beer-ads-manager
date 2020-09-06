@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { Upload, message } from 'antd';
+import { Upload } from 'antd';
 import { getUploadProps } from '../helpers';
 import MediaContainer from './MediaContainer';
 import Drag from './D_D/Drag';

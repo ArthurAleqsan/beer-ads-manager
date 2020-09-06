@@ -19,3 +19,9 @@ export const getDurationSeconds = str => {
     const s = +arr[0] * 3600 + +arr[1] * 60 + +arr[2];
     return s;
 }
+export const removeFromArray = (array, findFn) => {
+    const index = array.findIndex(findFn);
+    const newArray = [...array];
+    newArray.splice(index, 1);
+    return newArray;
+}

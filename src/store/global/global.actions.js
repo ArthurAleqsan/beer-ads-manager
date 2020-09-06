@@ -1,5 +1,5 @@
 import * as types from './../types';
-import { updateInArray, getTimeValuefromDuration } from '../../util/helpers';
+import { updateInArray, getTimeValuefromDuration, removeFromArray } from '../../util/helpers';
 
 export const collapse = (status) => {
     return {
@@ -36,20 +36,18 @@ export const changeRowContent = (dispatch, getState, key, value, id) => {
         newRows,
     });
 }
-export const addItemToTimelineBox = (dispatch, getState, item, id) => {
+export const changeItemToTimelineBox = (dispatch, getState, item, id) => {
     const { videoContentRows: rows } = getState().global;
     const splitedId = id.split('_');
     const colId = splitedId[0];
     const rowId = splitedId[1];
     let newRows = [...rows];
     const rowItem = newRows.find(r => r.id == rowId);
-    console.log(rowItem.tv_s)
-
-    const newTv_s = rowItem.tv_s.splice(colId - 1, 1, item);
-    console.log(newTv_s)
-    newRows = updateInArray(newRows, item => item.id == id, () => rowItem);
+    rowItem.tv_s.splice(+colId - 1, 1, item);
+    newRows = updateInArray(newRows, item => item.id == rowId, () => rowItem);
     dispatch({
         type: types.ROW_CHANGED,
         newRows,
     });
 }
+

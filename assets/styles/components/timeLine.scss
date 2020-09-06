@@ -45,6 +45,27 @@
             .video-timeline {
                 border-bottom: 1px solid #e5e5e5;
             }
+            .media-droped-item {
+                position: relative;
+                .media-droped-item-url {
+                    border-radius: 2px 2px 0 0;
+                }
+                .name-line {
+                    background: #3098f2;
+                    font-size: 9px;
+                    color: #fff;
+                    border-radius: 0 0 2px 2px;
+                    padding-left: 4px;
+                }
+                .remove-btn-container {
+                    display: none;
+                }
+                &:hover {
+                    .remove-btn-container {
+                        display: flex;
+                    }
+                }
+            }
             .blue-dashed {
                 transform: rotate(-90deg);
                 position: absolute;
@@ -66,13 +87,18 @@
                 justify-content: center;
                 align-items: center;
                 border-right: 1px solid #e5e5e5;
+                padding: 10px;
+                border-radius: 4px;
+                &:first-child {
+                    border-radius: 4px;
+                }
                 .empty-content-container {
                     display: flex;
                     flex-direction: column;
-                    border: 1px dashed #3098F2;
+                    border: 1px dashed #3098f2;
                     padding: 10px;
                     align-items: center;
-                    color: #3098F2;
+                    color: #3098f2;
                     font-weight: 300;
                     font-size: 12px;
                     line-height: 12px;

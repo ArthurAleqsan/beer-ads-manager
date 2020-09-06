@@ -1,11 +1,12 @@
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import { Row, Col } from 'antd';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 
-import { setStoreValue, addNewRow } from '../store/global/global.actions';
+import { setStoreValue, addNewRow, changeItemToTimelineBox } from '../store/global/global.actions';
 import SecondsInput from './common/SecondsInput';
 import { getTimeValuefromDuration, getDurationSeconds } from '../util/helpers';
 import DropTarget from './common/D_D/DropTarget';
+import DropedItem from './common/DropedItem';
 
 
 const TimeLine = () => {
@@ -15,6 +16,7 @@ const TimeLine = () => {
     const [buttonLeftStyle, setButtonLeftStyle] = useState(-10);
     const { tvCount, videoContentRows, duration } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
+    const { getState } = useStore();
     const contentRow = {
         tv_s: new Array(fake_tvCounts.length),
         dur: 60,
@@ -36,9 +38,13 @@ const TimeLine = () => {
         }
     };
     const [items, setItems] = React.useState([]);
-   
+
 
     const itemDropped = item => setItems([...items, item]);
+
+    const handleRemoveItem = (id) => {
+        changeItemToTimelineBox(dispatch, getState, null, id)
+    };
 
     return (
         <div className='player-timeline'>
@@ -64,11 +70,10 @@ const TimeLine = () => {
                     {fake_tvCounts.map((row, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
                         {videoContentRows && videoContentRows.map((r, j) => {
                             if (!r.tv_s[i]) {
-                                // console.log(i);
                                 return <DropTarget
                                     onItemDropped={itemDropped}
                                     dropEffect="copy"
-                                    key={i * j}
+                                    key={Math.random() * i * j}
                                     id={`${i + 1}_${j + 1}`}
                                 >
                                     <div className='timeline-row-item'>
@@ -80,14 +85,17 @@ const TimeLine = () => {
                                     </div>
                                 </DropTarget>
                             } else {
-                                // console.log(`${i + 1}_${j + 1}`);
-                                return <div key={i * j} className='timeline-row-item'>
-                                    <img src={r.tv_s[i].url} />
+                                return <div key={Math.random() * i * j} className='timeline-row-item'>
+                                    <DropedItem
+                                        type='image'
+                                        obj={r.tv_s[i]}
+                                        handleRemove={() => handleRemoveItem(`${i + 1}_${j + 1}`)}
+                                    />
                                 </div>
                             }
                         })}
                     </Row>)}
-                    <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle - 30}}>+ Добавить слайд</button>
+                    <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle - 30 }}>+ Добавить слайд</button>
                 </Col>
             </Row>
         </div>

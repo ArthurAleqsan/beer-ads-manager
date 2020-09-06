@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import RemoveBtn from './RemoveBtn';
 
 const MediaContainer = ({ isImg, file }) => {
     const { url, name, id } = file;
@@ -11,7 +12,7 @@ const MediaContainer = ({ isImg, file }) => {
         <div className='media-file-container'>
             {isImg
                 ? <img src={url} className='content-media' />
-                : <div className = 'video-container'>
+                : <div className='video-container'>
                     <img src={url} className='content-media' />
                     <div className='video-bottom-container'>
                         <img src='/assets/images/icons/player.svg' />
@@ -19,9 +20,7 @@ const MediaContainer = ({ isImg, file }) => {
                     </div>
                 </div>
             }
-            <div className='remove-btn-container'>
-                <img src='/assets/images/icons/bin.svg' onClick={handleRemove} className='remove-icon' />
-            </div>
+            <RemoveBtn handleRemove={handleRemove} />
             <div className='media-name-container'>{name}</div>
         </div>
     )

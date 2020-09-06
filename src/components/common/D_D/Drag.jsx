@@ -39,7 +39,7 @@ const Drag = props => {
 };
 
 Drag.propTypes = {
-    dataItem: PropTypes.string.isRequired,
+    dataItem: PropTypes.object.isRequired,
     dragImage: PropTypes.string,
     dropEffect: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,

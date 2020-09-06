@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import * as dropEffects from "./dropEffects";
 import { useDispatch, useStore } from "react-redux";
-import { addItemToTimelineBox } from "../../../store/global/global.actions";
+import { changeItemToTimelineBox } from "../../../store/global/global.actions";
 
 const insideStyle = {
     backgroundColor: "#cccccc",
@@ -25,7 +25,7 @@ const DropTarget = props => {
             props.onItemDropped(droppedItem);
         }
         console.log(droppedItem);
-        addItemToTimelineBox(dispatch, getState, droppedItem, id);
+        changeItemToTimelineBox(dispatch, getState, droppedItem, id);
         setIsOver(false);
     };
 

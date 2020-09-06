@@ -12,19 +12,4 @@
         height: 70px;
         border-radius: 4px;
     }
-    .remove-btn-container {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        width: 25px;
-        height: 25px;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        .remove-icon {
-            width: 12px;
-        }
-    }
 }
