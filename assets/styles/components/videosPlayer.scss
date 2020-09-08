@@ -71,6 +71,42 @@
     }
     .video-controls-container {
         height: 44px;
-        background: #4c4c4c;
+        border-radius: 0 0 4px 4px;
+        display: flex;
+        background: #e5e5e5;
+        .preview-btn {
+            height: 100%;
+            width: 25%;
+            border: unset;
+            background: #3098f2;
+            border-radius: 0 4px 4px 4px;
+            font-size: 20px;
+            line-height: 23px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .dot {
+                height: 8px;
+                width: 8px;
+                margin-right: 5px;
+            }
+        }
+        .video-controls-container {
+            width: 75%;
+            display: flex;
+            align-items: center;
+            padding: 1% 2%;
+            .centered-row {
+                width: 100%;
+                .control-buttons-container {
+                    display: flex;
+                    .controls-buttons {
+                        width: 10px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
 }

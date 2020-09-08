@@ -2,7 +2,7 @@ import * as types from './../types';
 
 const initialState = {
     collapsed: false,
-    tvCount: 3,
+    tvCount: 2,
     videoContentRows: null,
     duration: '00:00:00',
 };

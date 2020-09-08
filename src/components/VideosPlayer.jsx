@@ -9,6 +9,12 @@ const VideosPlayer = () => {
     for (let i = 0; i < tvCount; i++) {
         tvS.push(`TV №${i + 1}`);
     }
+    const playAndPause = () => {
+        const videos = document.getElementsByClassName('video-frame');
+        for (let i = 0; i < videos.length; i++) {
+            videos[i].paused ? videos[i].play() : videos[i].pause();
+        }
+    };
 
     return (
         <div className='videos-player'>
@@ -21,7 +27,19 @@ const VideosPlayer = () => {
                 })}
             </div>
             <div className='video-controls-container'>
-
+                <button className='preview-btn' onClick={playAndPause}>
+                    <img src='/assets/images/icons/ellipse.svg' className='dot' />
+                    <span className='text'>Предпросмотр</span>
+                </button>
+                <div className='video-controls-container'>
+                    <div className = 'centered-row'>
+                        <div className = 'control-buttons-container'>
+                            <img src = '/assets/images/icons/play.svg' className = 'controls-buttons' />
+                            <img src = '/assets/images/icons/pause.svg' className = 'controls-buttons' />
+                            <img src = '/assets/images/icons/stop.svg' className = 'controls-buttons' />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -7,14 +7,18 @@ const PlayerTv = ({ count, name, id }) => {
         case 1:
             body = <div className='single-tv-player-container'>
                 <div className='single-tv-player'>
-                    <iframe className='video-frame' src="https://www.w3schools.com" />
+                    <video>
+                        <source src='/assets/images/fake/v.mp4' />
+                    </video>
                 </div>
             </div>
             break;
         case 2:
             body = <div className='tv-player-container'>
                 <div className='tv-player'>
-                    <iframe className='video-frame' src="https://www.w3schools.com" />
+                    <video className = 'video-frame'>
+                        <source src='/assets/images/fake/v.mp4' />
+                    </video>
                     <div className='name-container'>
                         <span>{name}</span>
                     </div>
@@ -24,7 +28,9 @@ const PlayerTv = ({ count, name, id }) => {
         case 3:
             body = <div className={`tv-player-container small-containers container-${id}`}>
                 <div className='tv-player'>
-                    <iframe className='video-frame' src="https://www.w3schools.com" />
+                    <video>
+                        <source src='/assets/images/fake/v.mp4' />
+                    </video>
                     <div className='name-container'>
                         <span>{name}</span>
                     </div>
