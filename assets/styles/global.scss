@@ -86,3 +86,12 @@ $redactor-content-padding: 12px;
         }
     }
 }
+.shop-select {
+    width: 100%;
+    .ant-select-selector {
+        min-height: 48px;
+        .ant-select-selection-item {
+            line-height: 45px!important;
+        }
+    }
+}

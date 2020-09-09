@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { collapse } from '../store/global/global.actions';
-import VideoDownloadPopup from './popups/VideoDownloadPopup';
+// import VideoDownloadPopup from './popups/VideoDownloadPopup';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -30,10 +30,10 @@ const Header = () => {
                     disabled={!canDownload}
                 >Скачать</button>
             </div>
-            <VideoDownloadPopup
+            {/* <VideoDownloadPopup
                 visible={downloadModalVisible}
                 handleCancel={() => setDownloadModalVisible(false)}
-            />
+            /> */}
         </div>
     )
 };
