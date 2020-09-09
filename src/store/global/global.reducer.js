@@ -5,6 +5,7 @@ const initialState = {
     tvCount: 2,
     videoContentRows: null,
     duration: '00:00:00',
+    canDownload: true,
 };
 
 const globalReducer = (state = initialState, action) => {
