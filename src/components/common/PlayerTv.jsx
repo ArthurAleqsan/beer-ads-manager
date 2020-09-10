@@ -6,8 +6,8 @@ const PlayerTv = ({ count, name, id }) => {
     switch (count) {
         case 1:
             body = <div className='single-tv-player-container'>
-                <div className='single-tv-player'>
-                    <video>
+                <div className='single-tv-player' >
+                    <video className = 'video-frame'>
                         <source src='/assets/images/fake/v.mp4' />
                     </video>
                 </div>
@@ -28,7 +28,7 @@ const PlayerTv = ({ count, name, id }) => {
         case 3:
             body = <div className={`tv-player-container small-containers container-${id}`}>
                 <div className='tv-player'>
-                    <video>
+                    <video className = 'video-frame'>
                         <source src='/assets/images/fake/v.mp4' />
                     </video>
                     <div className='name-container'>

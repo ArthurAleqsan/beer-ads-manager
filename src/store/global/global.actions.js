@@ -1,5 +1,5 @@
 import * as types from './../types';
-import { updateInArray, getTimeValuefromDuration, removeFromArray } from '../../util/helpers';
+import { updateInArray, getTimeValuefromDuration, removeFromArray, getDurationSeconds } from '../../util/helpers';
 import VideoServices from '../../services/VideoServices';
 import Request from './../../services/Request';
 
@@ -37,7 +37,8 @@ export const changeRowContent = (dispatch, getState, key, value, id) => {
         type: types.ROW_CHANGED,
         newRows,
     });
-}
+};
+
 export const changeItemToTimelineBox = (dispatch, getState, item, id) => {
     const { videoContentRows: rows } = getState().global;
     const splitedId = id.split('_');
@@ -81,5 +82,26 @@ export const uploadMedia = (dispatch, getState, media) => {
                 });
             }
         })
+};
+
+export const generateVideo = (dispatch, getState) => {
+    const { videoContentRows } = getState().global;
+    const screens = [];
+    const rows = [];
+    const dur = [];
+    for (let i = 0; i < videoContentRows.length; i++) {
+        screens.push(i + 1);
+        dur.push(videoContentRows[i].dur);
+        const arr = videoContentRows.map((r) => r.tv_s[i]);
+        rows.push(arr);
+    }
+    for (let i = 0; i < screens.length; i++) {
+        for (let j = 0; j < rows.length; j++) {
+            const raw = { "name": "123", "path": "none", "slide": rows[i][j], "time": dur[i], "screen": screens[i] };
+            VideoServices.generateVideo(raw)
+                .then(r => console.log(r));
+        }
+    }
 }
+
 

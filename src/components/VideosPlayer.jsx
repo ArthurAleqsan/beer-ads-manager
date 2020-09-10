@@ -1,12 +1,15 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { Row } from 'antd';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 import PlayerTv from './common/PlayerTv';
 import { getTimeValuefromDuration } from '../util/helpers';
+import { generateVideo } from '../store/global/global.actions';
 
 const VideosPlayer = () => {
     const { tvCount } = useSelector(s => s.global, shallowEqual);
     const tvS = [];
+    const dispatch = useDispatch();
+    const { getState } = useStore();
     for (let i = 0; i < tvCount; i++) {
         tvS.push(`TV №${i + 1}`);
     }
@@ -50,6 +53,9 @@ const VideosPlayer = () => {
         }
         setIsPlaying(false);
     };
+    const handleGenerate = () => {
+        generateVideo(dispatch, getState);
+    };
 
 
     return (
@@ -63,7 +69,7 @@ const VideosPlayer = () => {
                 })}
             </div>
             <div className='video-controls-container'>
-                <button className='preview-btn' onClick={() => console.log('object')}>
+                <button className='preview-btn' onClick={handleGenerate}>
                     <img src='/assets/images/icons/ellipse.svg' className='dot' />
                     <span className='text'>Предпросмотр</span>
                 </button>

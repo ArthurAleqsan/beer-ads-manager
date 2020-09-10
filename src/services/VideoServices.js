@@ -12,14 +12,19 @@ class VideoServices extends Request {
         return this.send({ path: '/list-images', options }, true);
     }
     uploadMedia(data) {
-        console.log(data)
         const options = {
             method: 'POST',
             body: data,
         };
         return this.send({ path: '/load-video', options }, true);
     }
-
+    generateVideo(data) {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(data),
+        };
+        return this.send({ path: '/add-video', options }, true);
+    }
 }
 
 export default new VideoServices();

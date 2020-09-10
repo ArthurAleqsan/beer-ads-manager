@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RemoveBtn from './RemoveBtn';
+import { PUBLIC_PATH } from '../../util/conf';
 
 const DropedItem = ({ type, obj, handleRemove }) => {
+    const { image, name } = obj;
     let item;
     switch (type) {
         case 'image':
             item = <div className='media-droped-item'>
-                <img src={obj.url} className='media-droped-item-url' />
+                <img src={`${PUBLIC_PATH}${image}`} className='media-droped-item-url' />
                 <div className='name-line'>
-                    <span>{obj.name}</span>
+                    <span>{name}</span>
                 </div>
                 <RemoveBtn handleRemove={handleRemove} />
             </div>
@@ -20,7 +22,7 @@ const DropedItem = ({ type, obj, handleRemove }) => {
                     <source src="movie.mp4" type="video/mp4" />
                 </video>
                 <div className='name-line'>
-                    <span>{obj.name}</span>
+                    <span>{name}</span>
                 </div>
                 <RemoveBtn handleRemove={handleRemove} />
             </div>
