@@ -3,7 +3,7 @@ import { Modal, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import RedactorHeader from '../common/RedactorHeader';
 import ShopSelector from '../common/ShopSelector';
-import ShcheduleColHeader from '../common/videoDownload/ShcheduleColHeader';
+import ScheduleColHeader from '../common/videoDownload/ScheduleColHeader';
 
 const EditPriceContentPopup = ({ visible, handleCancel }) => {
     const [defName, setDefName] = useState('Прайс_Осень 2020')
@@ -40,7 +40,7 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
             </div>
             <Row className='modal-body'>
                 <Col span = {8}>
-                    <ShcheduleColHeader 
+                    <ScheduleColHeader 
                         name = {'TV 1'}
                     />
                 </Col>
