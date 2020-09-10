@@ -29,7 +29,6 @@ const VideosPlayer = () => {
         setActiveWidth(c_t / dur * 100 + '%');
         setCurrentTime(c_t);
     }
-    console.log(activeWidth);
     const setVideoCurrentTime = () => {
         setInterval(timer, 1000);
     }

@@ -1,0 +1,1 @@
+export const PUBLIC_PATH = 'http://dev-admin-hm.yakovlev.studio';

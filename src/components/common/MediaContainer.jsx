@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RemoveBtn from './RemoveBtn';
 import RemoveItemPopup from '../popups/RemoveItemPopup';
+import { PUBLIC_PATH } from '../../util/conf';
 
 const MediaContainer = ({ isImg, file }) => {
-    const { url, name, id } = file;
+    const { image, name, id } = file;
     const [visibility, setVisibility] = useState(false);
     const handleRemove = () => {
         console.log('removed' + id);
@@ -19,9 +20,9 @@ const MediaContainer = ({ isImg, file }) => {
     return (
         <div className='media-file-container'>
             {isImg
-                ? <img src={url} className='content-media' />
+                ? <img src={`${PUBLIC_PATH}${image}`} className='content-media' />
                 : <div className='video-container'>
-                    <img src={url} className='content-media' />
+                    <img src={`${PUBLIC_PATH}${image}`} className='content-media' />
                     <div className='video-bottom-container'>
                         <img src='/assets/images/icons/player.svg' />
                         <span>00.10.00</span>

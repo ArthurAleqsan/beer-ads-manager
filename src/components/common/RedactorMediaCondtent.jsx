@@ -1,42 +1,35 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Upload } from 'antd';
-import { getUploadProps } from '../helpers';
+import { Upload, Spin, message } from 'antd';
 import MediaContainer from './MediaContainer';
 import Drag from './D_D/Drag';
+import { getImages, uploadMedia } from '../../store/global/global.actions';
+import { useDispatch, useSelector, shallowEqual, useStore } from 'react-redux';
 
 const { Dragger } = Upload;
 
-const fakeImages = [
-    {
-        id: 1,
-        url: '/assets/images/fake/1.jpg',
-        name: '1',
-    },
-    {
-        id: 2,
-        url: '/assets/images/fake/2.jpg',
-        name: '2',
-    },
-    {
-        id: 3,
-        url: '/assets/images/fake/3.jpg',
-        name: '3',
-    },
-    {
-        id: 4,
-        url: '/assets/images/fake/4.jpg',
-        name: '4',
-    },
-    {
-        id: 5,
-        url: '/assets/images/fake/5.jpg',
-        name: '5',
-    },
-];
-
 const RedactorMediaCondtent = ({ isImgType }) => {
-    const props = getUploadProps();
+    const dispatch = useDispatch();
+    const { getState } = useStore();
+    const props = {
+        name: 'file',
+        multiple: false,
+        showUploadList: false,
+        onChange(info) {
+            const { status } = info.file;
+            if (status === 'done') {
+                uploadMedia(dispatch, getState, info.file.originFileObj);
+            } else if (status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    }
+
+    const { images } = useSelector(s => s.global, shallowEqual);
+    useEffect(() => {
+        getImages(dispatch);
+    }, []);
+
     return (
         <div className='media-container-content redactor-content'>
             <Dragger {...props}>
@@ -47,13 +40,13 @@ const RedactorMediaCondtent = ({ isImgType }) => {
                 </div>
             </Dragger>
             <div className='media-content'>
-                {fakeImages.map(media => {
-                    return <Drag 
-                    key={media.id} 
-                    dataItem={media} 
-                    dragImage={media.url} 
-                    dropEffect="copy"><MediaContainer file={media} isImg={isImgType} /></Drag>
-                })}
+                {images ? images.map(media => {
+                    return <Drag
+                        key={media.id}
+                        dataItem={media}
+                        dragImage={media.url}
+                        dropEffect="copy"><MediaContainer file={media} isImg={isImgType} /></Drag>
+                }) : <Spin />}
             </div>
         </div>
     )

@@ -6,6 +6,7 @@ const initialState = {
     videoContentRows: null,
     duration: '00:00:00',
     canDownload: true,
+    images: null
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const globalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 collapsed: action.status
+            }
+        case types.GET_SUCCESS_IMAGES:
+            return {
+                ...state,
+                images: action.images,
             }
         case types.SET_STORE_VALUE:
             return {

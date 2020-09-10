@@ -1,5 +1,7 @@
 import * as types from './../types';
 import { updateInArray, getTimeValuefromDuration, removeFromArray } from '../../util/helpers';
+import VideoServices from '../../services/VideoServices';
+import Request from './../../services/Request';
 
 export const collapse = (status) => {
     return {
@@ -49,5 +51,35 @@ export const changeItemToTimelineBox = (dispatch, getState, item, id) => {
         type: types.ROW_CHANGED,
         newRows,
     });
+};
+
+export const getImages = (dispatch) => {
+    VideoServices.getImages()
+        .then((res) => {
+            if (res.json.ERR == 0) {
+                const images = res.json.DATA.model;
+                dispatch({
+                    type: types.GET_SUCCESS_IMAGES,
+                    images,
+                });
+            }
+        })
+};
+export const uploadMedia = (dispatch, getState, media) => {
+    const form = new FormData();
+    const { images } = getState().global;
+    form.append('imageFiles[]', media);
+    form.append('video', 1)
+    VideoServices.uploadMedia(form)
+        .then(res => {
+            if (res.json.ERR == 0) {
+                const key = Object.keys(res.json.DATA.model)[0]
+                const image = res.json.DATA.model[key];
+                dispatch({
+                    type: types.GET_SUCCESS_IMAGES,
+                    images: [...images, image],
+                });
+            }
+        })
 }
 
