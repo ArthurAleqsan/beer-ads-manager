@@ -35,6 +35,63 @@
                     padding-right: 8px;
                 }
             }
+            .schedule-item-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 55px;
+                border: 1px solid #e5e5e5;
+                font-size: 12px;
+                line-height: 16px;
+                .id-container {
+                    display: flex;
+                    align-items: center;
+                    width: 5%;
+                    max-width: 55px;
+                    img {
+                        margin-right: 3px;
+                        width: 6px;
+                    }
+                }
+                .image-container {
+                    width: 15%;
+                    max-width: 36px;
+                    height: 36px;
+                    border-radius: 4px;
+                    .item-url {
+                        height: 25px;
+                        border-radius: 4px 4px 0 0;
+                    }
+                    .name-line {
+                        background: #3098f2;
+                        width: 100%;
+                        font-size: 10px;
+                        color: #fff;
+                        text-align: center;
+                        border-radius: 0 0 4px 4px;
+                    }
+                }
+                .name-container {
+                    width: 30%;
+                }
+                .price-container {
+                    width: 10%;
+                }
+                .discount-container {
+                    width: 20%;
+                    .ant-checkbox-group-item {
+                        font-size: 12px
+                    }
+                }
+            }
+        }
+        .multicol-content {
+            justify-content: space-between;
+        }
+        .mincol-content {
+            .content-col {
+                margin-right: 10px;
+            }
         }
     }
 }
