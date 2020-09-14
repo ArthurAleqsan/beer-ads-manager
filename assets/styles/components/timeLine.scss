@@ -63,6 +63,14 @@
                         display: flex;
                     }
                 }
+                .product-name-line {
+                    background: #e9f3fb;
+                    color: #3098f2;
+                    border-radius: 4px;
+                    text-align: center;
+                    font-size: 0.9em;
+                    line-height: 16px;
+                }
             }
             .blue-dashed {
                 transform: rotate(-90deg);

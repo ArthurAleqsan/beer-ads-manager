@@ -4,7 +4,7 @@ import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 
 import { setStoreValue, addNewRow, changeItemToTimelineBox } from '../store/global/global.actions';
 import SecondsInput from './common/SecondsInput';
-import { getTimeValuefromDuration, getDurationSeconds } from '../util/helpers';
+import { getTimeValuefromDuration, getDurationSeconds, getTypeOfDroppedItem } from '../util/helpers';
 import DropTarget from './common/D_D/DropTarget';
 import DropedItem from './common/DropedItem';
 import RemoveItemPopup from './popups/RemoveItemPopup';
@@ -101,7 +101,7 @@ const TimeLine = () => {
                             } else {
                                 return <div key={Math.random() * i * j} className='timeline-row-item'>
                                     <DropedItem
-                                        type='image'
+                                        type={getTypeOfDroppedItem(r.tv_s[i])}
                                         obj={r.tv_s[i]}
                                         handleRemove={() => openRemoveModal(`${i + 1}_${j + 1}`)}
                                     />

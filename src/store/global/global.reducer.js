@@ -9,6 +9,7 @@ const initialState = {
     images: null,
     tvTemplate: null,
     shops: null,
+    products: null,
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -48,6 +49,11 @@ const globalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 shops: action.shops
+            }
+        case types.GET_SUCCESS_PRODUCTS:
+            return {
+                ...state,
+                products: action.products,
             }
         default:
             return state

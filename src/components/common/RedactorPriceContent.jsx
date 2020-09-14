@@ -4,7 +4,9 @@ import MediaContainer from './MediaContainer';
 import ShopSelector from './ShopSelector';
 import EditPriceContentPopup from '../popups/EditPriceContentPopup';
 import { getTvTemplates } from '../../store/global/global.actions';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { Spin } from 'antd';
+import Product from './Product';
 
 
 const RedactorPriceContent = () => {
@@ -12,20 +14,26 @@ const RedactorPriceContent = () => {
     const toogleModal = () => {
         setVisible(!visible);
     };
+    const { products } = useSelector(s => s.global, shallowEqual);
 
     return (
         <div className='price-container-content redactor-content'>
-            <button className='yellow-btn btn' onClick = {toogleModal}>Редактировать прайс</button>
+            <button className='yellow-btn btn' onClick={toogleModal}>Редактировать прайс</button>
             <div className='shop-selector-container'>
                 <ShopSelector />
             </div>
 
             <div className='media-content'>
-
+                {products ? products.map(media => {
+                    return <Drag
+                        key={media.id}
+                        dataItem={media}
+                        dropEffect="copy"><Product file = {media}/></Drag>
+                }) : <Spin />}
             </div>
             <EditPriceContentPopup
                 visible={visible}
-                handleCancel = {toogleModal}
+                handleCancel={toogleModal}
             />
         </div>
     )

@@ -46,7 +46,13 @@ app.use(
         changeOrigin: true
     })
 );
-
+app.use(
+    '/video/list-product',
+    createProxyMiddleware({
+        target: API,
+        changeOrigin: true
+    })
+);
 
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));

@@ -5,10 +5,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 const RedactorHeader = () => {
     const { tvTemplate } = useSelector(s => s.global, shallowEqual);
-    useEffect(() => {
 
-    },[]);
-    console.log(tvTemplate);
     return (
         <Row className='redactor-header'>
             <Col span={8} className='header-icon-container'>

@@ -38,6 +38,13 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/list-shop', options }, true);
     }
+    getProductsForShop(id) {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ shop: [id] })
+        };
+        return this.send({ path: '/list-product', options }, true);
+    }
 }
 
 export default new VideoServices();

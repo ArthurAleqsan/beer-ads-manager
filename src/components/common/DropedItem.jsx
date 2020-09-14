@@ -27,6 +27,14 @@ const DropedItem = ({ type, obj, handleRemove }) => {
                 <RemoveBtn handleRemove={handleRemove} />
             </div>
             break;
+        case 'product':
+            item = <div className='media-droped-item'>
+                <div className='product-name-line'>
+                    <span>{name}</span>
+                </div>
+                <RemoveBtn handleRemove={handleRemove} />
+            </div>
+            break;
         default:
 
     }

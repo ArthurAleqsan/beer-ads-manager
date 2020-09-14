@@ -56,9 +56,9 @@ export const changeItemToTimelineBox = (dispatch, getState, item, id) => {
 
 export const getImages = (dispatch) => {
     VideoServices.getImages()
-        .then((res) => {
-            if (res.json.ERR == 0) {
-                const images = res.json.DATA.model;
+        .then((r) => {
+            if (r.json.ERR == 0) {
+                const images = r.json.DATA.model;
                 dispatch({
                     type: types.GET_SUCCESS_IMAGES,
                     images,
@@ -66,6 +66,17 @@ export const getImages = (dispatch) => {
             }
         })
 };
+export const getProducts = (dispatch, id) => {
+    VideoServices.getProductsForShop(id)
+        .then(r => {
+            if (r.json.ERR == 0) {
+                dispatch({
+                    type: types.GET_SUCCESS_PRODUCTS,
+                    products: r.json.DATA.model,
+                })
+            }
+        });
+}
 export const uploadMedia = (dispatch, getState, media) => {
     const form = new FormData();
     const { images } = getState().global;
@@ -132,13 +143,13 @@ export const getShops = (dispatch) => {
         .then(r => {
             if (r.json.ERR == 0) {
                 const data = r.json.DATA.model;
-                console.log(data)
                 dispatch({
                     type: types.GET_SUCCESS_SHOPS,
                     shops: data,
                 });
             }
         })
-}
+};
+
 
 

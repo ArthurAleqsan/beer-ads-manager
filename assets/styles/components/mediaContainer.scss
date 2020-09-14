@@ -18,3 +18,18 @@
         }
     }
 }
+.product {
+    background: #e9f3fb;
+    color: #3098f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 25px;
+    width: 150px;
+    border-radius: 4px;
+    height: 100px;
+    .name-container {
+        text-align: center;
+    }
+
+}
