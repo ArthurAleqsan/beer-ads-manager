@@ -129,7 +129,16 @@ export const getTvTemplates = (dispatch, id) => {
 
 export const getShops = (dispatch) => {
     VideoServices.getShops()
-        .then(r => console.log(r))
+        .then(r => {
+            if (r.json.ERR == 0) {
+                const data = r.json.DATA.model;
+                console.log(data)
+                dispatch({
+                    type: types.GET_SUCCESS_SHOPS,
+                    shops: data,
+                });
+            }
+        })
 }
 
 

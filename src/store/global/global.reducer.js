@@ -8,6 +8,7 @@ const initialState = {
     canDownload: true,
     images: null,
     tvTemplate: null,
+    shops: null,
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -42,6 +43,11 @@ const globalReducer = (state = initialState, action) => {
                 ...state,
                 tvTemplate: action.tvTemplate,
                 tvCount: action.tvCount,
+            }
+        case types.GET_SUCCESS_SHOPS:
+            return {
+                ...state,
+                shops: action.shops
             }
         default:
             return state

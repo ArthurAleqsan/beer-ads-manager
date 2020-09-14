@@ -25,3 +25,4 @@ export const removeFromArray = (array, findFn) => {
     newArray.splice(index, 1);
     return newArray;
 }
+export const getParam = (str, separator, index) => str.split(separator)[index].split('&')[0];
