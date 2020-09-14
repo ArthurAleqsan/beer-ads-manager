@@ -1,5 +1,5 @@
 .player-timeline {
-    height: 220px;
+    min-height: 220px;
     margin: 30px 35px;
     background: #e5e5e5;
     box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.08);
@@ -23,11 +23,12 @@
         }
     }
     .timeline-body {
-        height: calc(100% - 30px);
+        min-height: calc(100% - 30px);
         .timeline-title-container {
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 90px;
             .title-icon {
                 width: 22px;
                 margin-right: 12px;
@@ -42,14 +43,17 @@
         .timeline-content {
             background: #fff;
             position: relative;
+            min-height: 100px;
             .video-timeline {
                 border-bottom: 1px solid #e5e5e5;
             }
             .media-droped-item {
                 position: relative;
-                max-width: 85%;
+                height: 100%;
+                width: 100%;
                 .media-droped-item-url {
                     border-radius: 2px 2px 0 0;
+                    height: 85%;
                 }
                 .name-line {
                     background: #3098f2;
@@ -70,12 +74,17 @@
                     text-align: center;
                     font-size: 0.9em;
                     line-height: 16px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0 5px;
                 }
             }
             .blue-dashed {
                 transform: rotate(-90deg);
                 position: absolute;
-                top: 80px;
+                top: 45%;
                 background: #fff;
                 color: #3098f2;
                 border: 1px dashed #3098f2;
@@ -89,6 +98,7 @@
             }
             .timeline-row-item {
                 width: 120px;
+                min-height: 100px;
                 display: flex;
                 justify-content: center;
                 align-items: center;

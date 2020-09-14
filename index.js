@@ -19,6 +19,13 @@ app.use(
     })
 );
 app.use(
+    '/video/list-video',
+    createProxyMiddleware({
+        target: API,
+        changeOrigin: true
+    })
+);
+app.use(
     '/video/load-video',
     createProxyMiddleware({
         target: API,

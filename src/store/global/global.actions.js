@@ -96,19 +96,20 @@ export const uploadMedia = (dispatch, getState, media) => {
 };
 
 export const generateVideo = (dispatch, getState) => {
-    const { videoContentRows } = getState().global;
-    const screens = [];
+    const { videoContentRows, tvCount } = getState().global;
+    const screens =  new Array(tvCount);
     const rows = [];
     const dur = [];
+
     for (let i = 0; i < videoContentRows.length; i++) {
-        screens.push(i + 1);
         dur.push(videoContentRows[i].dur);
         const arr = videoContentRows.map((r) => r.tv_s[i]);
         rows.push(arr);
     }
     for (let i = 0; i < screens.length; i++) {
+        const row = videoContentRows.map((r) => r.tv_s[i]);
         for (let j = 0; j < rows.length; j++) {
-            const raw = { "name": "123", "path": "none", "slide": rows[i][j], "time": dur[i], "screen": screens[i] };
+            const raw = { name: "123", path: "none", slide: row[j], time: dur[j], screen: i+1 };
             VideoServices.generateVideo(raw)
                 .then(r => console.log(r));
         }

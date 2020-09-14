@@ -75,13 +75,13 @@ const TimeLine = () => {
             </Row>
             <Row className='timeline-body' ref={contentRef}>
                 <Col span={2} >
-                    {screens_count.map(c => <div style={{ height: lineHeight }} key={c} className='timeline-title-container'>
+                    {screens_count.map(c => <div /*style={{ height: lineHeight }}*/ key={c} className='timeline-title-container'>
                         <img src='/assets/images/icons/tv.svg' className='title-icon' />
                         <span className='timeline-title'>{c}</span>
                     </div>)}
                 </Col>
                 <Col span={22} className='timeline-content'>
-                    {screens_count.map((row, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
+                    {screens_count.map((row, i) => <Row key={i} className='video-timeline' /*style={{ height: lineHeight }}*/ >
                         {videoContentRows && videoContentRows.map((r, j) => {
                             if (!r.tv_s[i]) {
                                 return <DropTarget
