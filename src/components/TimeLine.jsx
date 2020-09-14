@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState } from 'react';
+import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { Row, Col } from 'antd';
 import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 
@@ -11,7 +11,7 @@ import RemoveItemPopup from './popups/RemoveItemPopup';
 
 
 const TimeLine = () => {
-    const fake_tvCounts = ['tv-1', 'tv-2'];
+    const screens_count = [];
     const contentRef = useRef();
     const [lineHeight, setLineHeight] = useState(190);
     const [buttonLeftStyle, setButtonLeftStyle] = useState(-40);
@@ -20,8 +20,11 @@ const TimeLine = () => {
     const { tvCount, videoContentRows, duration } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
     const { getState } = useStore();
+    for (let i = 0; i < tvCount; i++) {
+        screens_count.push(`tv-${i+1}`);
+    }
     const contentRow = {
-        tv_s: new Array(fake_tvCounts.length),
+        tv_s: new Array(screens_count.length),
         dur: 60,
         id: 1,
     };
@@ -72,13 +75,13 @@ const TimeLine = () => {
             </Row>
             <Row className='timeline-body' ref={contentRef}>
                 <Col span={2} >
-                    {fake_tvCounts.map(c => <div style={{ height: lineHeight }} key={c} className='timeline-title-container'>
+                    {screens_count.map(c => <div style={{ height: lineHeight }} key={c} className='timeline-title-container'>
                         <img src='/assets/images/icons/tv.svg' className='title-icon' />
                         <span className='timeline-title'>{c}</span>
                     </div>)}
                 </Col>
                 <Col span={22} className='timeline-content'>
-                    {fake_tvCounts.map((row, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
+                    {screens_count.map((row, i) => <Row key={i} className='video-timeline' style={{ height: lineHeight }}>
                         {videoContentRows && videoContentRows.map((r, j) => {
                             if (!r.tv_s[i]) {
                                 return <DropTarget

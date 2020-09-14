@@ -20,6 +20,13 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
     } else if (24 / tvCount == 8) {
         colSpan = 7;
     }
+    const handleCancelChanges = () => {
+        handleCancel();
+    }; 
+    const handlSave = () => {
+        console.log('saved');
+    };
+    const canSave = true;
     return (
         <Modal
             visible={visible}
@@ -155,6 +162,14 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
                     </Col>
                 </DragDropContext>
             </Row>
+            <div className = 'modal-footer buttons-container'>
+            <button className='btn save-btn' onClick={handleCancelChanges}>Отмена</button>
+                <button
+                    className={`btn download-btn yellow-btn ${canSave ? '' : 'disabled-btn'}`}
+                    onClick={handlSave}
+                    disabled={!canSave}
+                >Сохранить</button>
+            </div>
         </Modal>
     )
 };

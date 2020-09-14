@@ -1,22 +1,27 @@
-import React from 'react';
-import {Row, Col} from 'antd';
+import React, { useEffect } from 'react';
+import { Row, Col } from 'antd';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 
 const RedactorHeader = () => {
-    const TV = 1;
+    const { tvTemplate } = useSelector(s => s.global, shallowEqual);
+    useEffect(() => {
+
+    },[]);
+    console.log(tvTemplate);
     return (
         <Row className='redactor-header'>
             <Col span={8} className='header-icon-container'>
                 <img src='/assets/images/icons/tv.svg' className='icon' />
-                <span>TV: {TV} шт</span>
+                <span>TV: {tvTemplate?.screens} шт</span>
             </Col>
             <Col span={8} className='header-icon-container'>
                 <img src='/assets/images/icons/shop.svg' className='icon' />
-                <span>Магазинов: {TV} шт</span>
+                <span>Магазинов: {tvTemplate?.countShops} шт</span>
             </Col>
             <Col span={8} className='header-icon-container'>
                 <img src='/assets/images/icons/crane.svg' className='icon' />
-                <span>Кранов: {TV} шт</span>
+                <span>Кранов: {tvTemplate?.countCranes} шт</span>
             </Col>
         </Row>
     )

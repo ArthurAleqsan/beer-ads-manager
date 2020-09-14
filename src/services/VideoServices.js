@@ -25,6 +25,19 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/add-video', options }, true);
     }
+    getTvTemplates(id) {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ TvtemplateSearch: { id } })
+        };
+        return this.send({ path: '/list-tvtemplate', options }, true);
+    }
+    getShops() {
+        const options = {
+            method: 'POST',
+        };
+        return this.send({ path: '/list-shop', options }, true);
+    }
 }
 
 export default new VideoServices();

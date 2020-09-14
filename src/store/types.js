@@ -4,3 +4,4 @@ export const ADD_NEW_ROW = 'ADD_NEW_ROW';
 export const ROW_CHANGED = 'ROW_CHANGED';
 
 export const GET_SUCCESS_IMAGES = 'GET_SUCCESS_IMAGES';
+export const SET_TV_TEMPLATE = 'SET_TV_TEMPLATE';

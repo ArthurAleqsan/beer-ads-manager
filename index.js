@@ -32,10 +32,26 @@ app.use(
         changeOrigin: true
     })
 );
+app.use(
+    '/video/list-tvtemplate',
+    createProxyMiddleware({
+        target: API,
+        changeOrigin: true
+    })
+);
+app.use(
+    '/video/list-shop',
+    createProxyMiddleware({
+        target: API,
+        changeOrigin: true
+    })
+);
+
 
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
+
 
 
 app.listen(PORT, () => {

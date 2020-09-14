@@ -6,7 +6,8 @@ const initialState = {
     videoContentRows: null,
     duration: '00:00:00',
     canDownload: true,
-    images: null
+    images: null,
+    tvTemplate: null,
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -35,6 +36,12 @@ const globalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 videoContentRows: action.newRows,
+            }
+        case types.SET_TV_TEMPLATE:
+            return {
+                ...state,
+                tvTemplate: action.tvTemplate,
+                tvCount: action.tvCount,
             }
         default:
             return state

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Drag from './D_D/Drag';
 import MediaContainer from './MediaContainer';
 import ShopSelector from './ShopSelector';
 import EditPriceContentPopup from '../popups/EditPriceContentPopup';
+import { getTvTemplates } from '../../store/global/global.actions';
+import { useDispatch } from 'react-redux';
 
 
 const RedactorPriceContent = () => {

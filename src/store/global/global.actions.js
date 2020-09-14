@@ -1,7 +1,7 @@
 import * as types from './../types';
 import { updateInArray, getTimeValuefromDuration, removeFromArray, getDurationSeconds } from '../../util/helpers';
 import VideoServices from '../../services/VideoServices';
-import Request from './../../services/Request';
+import { message } from 'antd';
 
 export const collapse = (status) => {
     return {
@@ -102,6 +102,34 @@ export const generateVideo = (dispatch, getState) => {
                 .then(r => console.log(r));
         }
     }
+}
+
+export const getTvTemplates = (dispatch, id) => {
+    VideoServices.getTvTemplates(id)
+        .then(r => {
+            if (r.json.ERR == 0) {
+                if (Object.keys(r.json.DATA.model.length == 1)) {
+                    Object.keys(r.json.DATA.model).forEach(k => {
+                        const template = r.json.DATA.model[k];
+                        dispatch({
+                            type: types.SET_TV_TEMPLATE,
+                            tvTemplate: template,
+                            tvCount: template.screens,
+                        });
+
+                    })
+                } else {
+                    return message.error('Выберите шаблон.')
+                }
+
+
+            }
+        })
+};
+
+export const getShops = (dispatch) => {
+    VideoServices.getShops()
+        .then(r => console.log(r))
 }
 
 
