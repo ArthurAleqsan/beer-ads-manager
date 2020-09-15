@@ -23,12 +23,12 @@
         }
     }
     .timeline-body {
-        min-height: calc(100% - 30px);
+        // min-height: calc(100% - 30px);
         .timeline-title-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 90px;
+            min-height: 100px;
             .title-icon {
                 width: 22px;
                 margin-right: 12px;

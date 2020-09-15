@@ -5,12 +5,12 @@ const initialState = {
     tvCount: 2,
     videoContentRows: null,
     duration: '00:00:00',
-    canDownload: true,
+    canDownload: false,
     images: null,
     tvTemplate: null,
     shops: null,
     products: null,
-    selectedShop: null
+    selectedShop: null,
 };
 
 const globalReducer = (state = initialState, action) => {

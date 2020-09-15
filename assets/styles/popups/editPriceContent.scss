@@ -2,7 +2,10 @@
     // background: #F7FAFC;
     min-width: 70%;
     .ant-modal-content {
-        // background: #F7FAFC ;
+        .ant-modal-body {
+            background: #f7fafc;
+        }
+
         .modal-header {
             .header-input {
                 width: 100%;
@@ -34,6 +37,9 @@
                 .file-name-container {
                     padding-right: 8px;
                 }
+            }
+            .schedule-items-container {
+                background: #fff;
             }
             .schedule-item-container {
                 display: flex;

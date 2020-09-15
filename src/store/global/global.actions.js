@@ -19,6 +19,7 @@ export const setStoreValue = (name, value) => {
 }
 export const addNewRow = (dispatch, row) => {
     dispatch(setStoreValue('duration', 60));
+    dispatch(setStoreValue('canDownload', false));
     dispatch({
         type: types.ADD_NEW_ROW,
         row
@@ -48,6 +49,15 @@ export const changeItemToTimelineBox = (dispatch, getState, item, id) => {
     const rowItem = newRows.find(r => r.id == rowId);
     rowItem.tv_s.splice(+colId - 1, 1, item);
     newRows = updateInArray(newRows, item => item.id == rowId, () => rowItem);
+    let status = true;
+    for (let i = 0; i < newRows.length; i++) {
+        for(let j = 0; j < newRows[i].tv_s.length; j++) {
+            if(!newRows[i].tv_s[j]) {
+                status = false;
+            }
+        }     
+    }
+    dispatch(setStoreValue('canDownload', status));
     dispatch({
         type: types.ROW_CHANGED,
         newRows,
@@ -155,6 +165,3 @@ export const getShopTemplates = (dispatch, id) => {
     VideoServices.getShopsTemplatesList(id)
         .then(r => console.log(r));
 }
-
-
-
