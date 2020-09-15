@@ -1,10 +1,10 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Select } from 'antd';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+
 import { getParam } from '../../util/helpers';
-import { getProducts } from '../../store/global/global.actions';
-import { useDispatch } from 'react-redux';
+import { getProducts, setStoreValue } from '../../store/global/global.actions';
 
 const { Option } = Select;
 
@@ -12,23 +12,24 @@ const { Option } = Select;
 const ShopSelector = () => {
     const { search } = useLocation();
     const history = useHistory();
-    const { shops } = useSelector(s => s.global, shallowEqual);
-    const [selectedShop, selectShop] = useState(null);
+    const { shops, selectedShop } = useSelector(s => s.global, shallowEqual);
     const hasSearchState = search.includes('shop=');
     const dispatch = useDispatch();
 
     if (!selectedShop && shops) {
         if (hasSearchState) {
             const shop = shops.find(s => s.id == getParam(search, 'shop=', 1));
-            selectShop(shop);
+            dispatch(setStoreValue('selectedShop', shop));
             getProducts(dispatch, shop.id);
             
         } else {
             getProducts(dispatch, shops[0].id);
-            selectShop(shops[0]);
+            dispatch(setStoreValue('selectedShop', shops[0]));
         }
     }
     const handleChange = (v) => {
+        const shop = shops.find(s => s.id == v);
+        dispatch(setStoreValue('selectedShop', shop));
         history.push(`/?shop=${v}`);
     }
     return (

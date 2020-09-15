@@ -97,7 +97,7 @@ export const uploadMedia = (dispatch, getState, media) => {
 
 export const generateVideo = (dispatch, getState) => {
     const { videoContentRows, tvCount } = getState().global;
-    const screens =  new Array(tvCount);
+    const screens = new Array(tvCount);
     const rows = [];
     const dur = [];
 
@@ -109,7 +109,7 @@ export const generateVideo = (dispatch, getState) => {
     for (let i = 0; i < screens.length; i++) {
         const row = videoContentRows.map((r) => r.tv_s[i]);
         for (let j = 0; j < rows.length; j++) {
-            const raw = { name: "123", path: "none", slide: row[j], time: dur[j], screen: i+1 };
+            const raw = { name: "123", path: "none", slide: row[j], time: dur[j], screen: i + 1 };
             VideoServices.generateVideo(raw)
                 .then(r => console.log(r));
         }
@@ -151,6 +151,10 @@ export const getShops = (dispatch) => {
             }
         })
 };
+export const getShopTemplates = (dispatch, id) => {
+    VideoServices.getShopsTemplatesList(id)
+        .then(r => console.log(r));
+}
 
 
 

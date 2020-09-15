@@ -10,6 +10,7 @@ const initialState = {
     tvTemplate: null,
     shops: null,
     products: null,
+    selectedShop: null
 };
 
 const globalReducer = (state = initialState, action) => {

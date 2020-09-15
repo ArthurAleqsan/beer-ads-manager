@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { Spin } from 'antd';
+
 import Drag from './D_D/Drag';
 import MediaContainer from './MediaContainer';
 import ShopSelector from './ShopSelector';
 import EditPriceContentPopup from '../popups/EditPriceContentPopup';
 import { getTvTemplates } from '../../store/global/global.actions';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Spin } from 'antd';
 import Product from './Product';
 
 

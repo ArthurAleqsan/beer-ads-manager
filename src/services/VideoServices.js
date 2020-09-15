@@ -45,6 +45,14 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/list-product', options }, true);
     }
+    getShopsTemplatesList(id) {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ tvtemplate: id })
+        };
+        return this.send({ path: '/list-temlatetoshops', options }, true);
+    }
 }
+
 
 export default new VideoServices();

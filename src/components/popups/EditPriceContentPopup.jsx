@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Row, Col } from 'antd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+
 import RedactorHeader from '../common/RedactorHeader';
 import ShopSelector from '../common/ShopSelector';
 import ScheduleColHeader from '../common/schedule/ScheduleColHeader';
-import { useSelector, shallowEqual } from 'react-redux';
 import ScheduleItem from '../common/schedule/ScheduleItem';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 
 const EditPriceContentPopup = ({ visible, handleCancel }) => {
-    const [defName, setDefName] = useState('Прайс_Осень 2020');
-    const { tvCount } = useSelector(s => s.global, shallowEqual);
+    const { tvCount, selectedShop, products } = useSelector(s => s.global, shallowEqual);
+    const [localSelectedShop, setLocalSelectedShop] = useState(null);
+    const tvS = [];
+    useEffect(() => {
+        setLocalSelectedShop(selectedShop);
+    }, []);
+    for (let i = 0; i < tvCount; i++) {
+        const obj = {
+            name: `TV ${i + 1}`,
+            products
+        }
+        tvS.push(obj);
+    }
     const handleChange = (e) => {
-        setDefName(e.target.value);
+        setLocalSelectedShop(e.target.value);
     };
     let colSpan = 8;
     if (24 / tvCount < 8) {
@@ -22,13 +35,13 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
     }
     const handleCancelChanges = () => {
         handleCancel();
-    }; 
+    };
     const handlSave = () => {
         console.log('saved');
     };
     const canSave = true;
     return (
-        <Modal
+        selectedShop && <Modal
             visible={visible}
             footer={null}
             header={null}
@@ -46,7 +59,7 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
                     <Col span={6} offset={6}>
                         <input
                             className='header-input'
-                            value={defName}
+                            value={localSelectedShop ? localSelectedShop.name : selectedShop.name}
                             onChange={handleChange}
                         />
                     </Col>
@@ -57,115 +70,47 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
             </div>
             <Row className={`modal-body ${tvCount > 2 ? 'multicol-content' : 'mincol-content'}`}>
                 <DragDropContext>
-                    <Col span={colSpan} className={'content-col'}>
-                        <ScheduleColHeader
-                            name={'TV 1'}
-                        />
-                        <div className='schedule-items-container'>
-                            <Droppable droppableId="droppable-1" type="PERSON">
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.droppableProps}
-                                    >
-                                        <Draggable draggableId="draggable-1" index={0}>
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <ScheduleItem item={{ id: 5, imgText: '1/15', name: 'Мартовское темное Ф', price: '60 R', hasDiscount: true }} />
-                                            </div>
-                                        )}
-                                    </ Draggable>
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <Droppable droppableId="droppable-1" type="PERSON">
-                                {(provided, snapshot) => {
-                                    console.log(provided);
-                                    return (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.droppableProps}
-                                    >
-                                        <Draggable draggableId="draggable-2" index={1}>
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <ScheduleItem item={{ id: 5, imgText: '1/15', name: 'Мартовское темное Ф', price: '60 R', hasDiscount: false }} />
-                                            </div>
-                                        )}
-                                    </ Draggable>
-                                        {provided.placeholder}
-                                    </div>
-                                )}}
-                            </Droppable>
-                        </div>
-                    </Col>
-                    <Col span={colSpan} className={'content-col'}>
-                        <ScheduleColHeader
-                            name={'TV 2'}
-                        />
-                        <div className='schedule-items-container'>
-                            <Droppable droppableId="droppable-2" type="PERSON">
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.droppableProps}
-                                    >
-                                        <Draggable draggableId="draggable-3" index={0}>
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <ScheduleItem item={{ id: 5, imgText: '1/15', name: 'Мартовское темное Ф', price: '60 R', hasDiscount: true }} />
-                                            </div>
-                                        )}
-                                    </ Draggable>
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <Droppable droppableId="droppable-2" type="PERSON">
-                                {(provided, snapshot) => {
-                                    console.log(provided);
-                                    return (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.droppableProps}
-                                    >
-                                        <Draggable draggableId="draggable-4" index={4}>
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <ScheduleItem item={{ id: 5, imgText: '1/15', name: 'Мартовское темное Ф', price: '60 R', hasDiscount: false }} />
-                                            </div>
-                                        )}
-                                    </ Draggable>
-                                        {provided.placeholder}
-                                    </div>
-                                )}}
-                            </Droppable>
-                        </div>
+                    {tvS.map((obj, i) => {
+                        return <Col span={colSpan} className={'content-col'} key={name}>
+                            <ScheduleColHeader
+                                name={obj.name}
+                            />
+                            <div className='schedule-items-container'>
+                                <Droppable droppableId={`droppable-${i + 1}`}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps}
+                                        >
+                                            {obj.products.map((product, j) => {
+                                                return <>
+                                                    <Draggable draggableId={`draggable-${(i + 1)+'_'+(j + 1)}`} index={j}>
+                                                        {(provided, snapshot) => (
+                                                            <div
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                            >
+                                                                <ScheduleItem item={product} />
+                                                            </div>
+                                                        )}
+                                                    </ Draggable>
+                                                    {provided.placeholder}
+                                                </>
+                                            })}
 
-                    </Col>
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </div>
+                        </Col>
+                    })}
                 </DragDropContext>
             </Row>
-            <div className = 'modal-footer buttons-container'>
-            <button className='btn save-btn' onClick={handleCancelChanges}>Отмена</button>
+            <div className='modal-footer buttons-container'>
+                <button className='btn cancel-btn' onClick={handleCancelChanges}>Отмена</button>
                 <button
-                    className={`btn download-btn yellow-btn ${canSave ? '' : 'disabled-btn'}`}
+                    className={`btn save-btn yellow-btn ${canSave ? '' : 'disabled-btn'}`}
                     onClick={handlSave}
                     disabled={!canSave}
                 >Сохранить</button>
