@@ -11,6 +11,20 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/list-images', options }, true);
     }
+    removeImage(id) {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ id }),
+        };
+        return this.send({ path: '/delete-image', options }, true);
+    }
+    removeProduct(id) {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ id }),
+        };
+        return this.send({ path: '/delete-producttotemplate', options }, true);
+    }
     uploadMedia(data) {
         const options = {
             method: 'POST',

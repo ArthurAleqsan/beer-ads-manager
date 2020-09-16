@@ -2,11 +2,15 @@ import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import RemoveBtn from './RemoveBtn';
 import RemoveItemPopup from '../popups/RemoveItemPopup';
+import { useDispatch, useStore } from 'react-redux';
+import { removeItem } from '../../store/global/global.actions';
 
 const Product = ({ file }) => {
     const [visibility, setVisibility] = useState(false);
+    const dispatch = useDispatch();
+    const { getState } = useStore();
     const handleRemove = () => {
-        console.log('removed' + file.id);
+        removeItem(dispatch, getState, file.id, 'product');
     };
     const openRemoveModal = () => {
         setVisibility(true);

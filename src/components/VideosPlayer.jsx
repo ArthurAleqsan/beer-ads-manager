@@ -26,6 +26,14 @@ const VideosPlayer = () => {
             clearInterval(timer);
         }
     });
+    // function clickedBar(e){
+    //     if(!myMovie.paused && !myMovie.ended){
+    //         var mouseX=e.pageX-bar.offsetLeft;
+    //         var newtime=mouseX*myMovie.duration/barSize;
+    //         myMovie.currentTime=newtime;
+    //         progressBar.style.width=mouseX+'px';
+    //     }
+    // }
     const timer = () => {
         const c_t = Math.ceil(videos[0].currentTime);
         const dur = videos[0].duration;

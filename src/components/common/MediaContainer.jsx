@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import RemoveBtn from './RemoveBtn';
 import RemoveItemPopup from '../popups/RemoveItemPopup';
 import { PUBLIC_PATH } from '../../util/conf';
+import { useDispatch, useStore } from 'react-redux';
+import { removeItem } from '../../store/global/global.actions';
 
 const MediaContainer = ({ isImg, file }) => {
     const { image, name, id } = file;
     const [visibility, setVisibility] = useState(false);
+    const dispatch = useDispatch();
+    const { getState } = useStore();
     const handleRemove = () => {
-        console.log('removed' + id);
+        removeItem(dispatch, getState, id, isImg ? 'image' : 'video');
     };
     const openRemoveModal = () => {
         setVisibility(true);

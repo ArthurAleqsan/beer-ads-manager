@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'antd';
+import { PUBLIC_PATH } from '../../../util/conf';
 
 const ScheduleItem = ({ item }) => {
-    const { id, imgText, name, price, hasDiscount } = item;
+    const { id, imgText, name, price, hasDiscount, image } = item;
     const options = [
         { label: 'Apple', value: 'Apple' },
         { label: 'Pear', value: 'Pear' },
@@ -18,7 +19,7 @@ const ScheduleItem = ({ item }) => {
                 <span>{id}</span>
             </div>
             <div className='image-container'>
-                <img src={`/assets/images/img.jpg`} className='item-url' />
+                <img src={`${PUBLIC_PATH}/upload/product/${image}`} className='item-url' />
                 <div className='name-line'>
                     <span>{imgText}</span>
                 </div>

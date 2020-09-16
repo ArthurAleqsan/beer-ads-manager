@@ -26,10 +26,17 @@ export const addNewRow = (dispatch, row) => {
     });
 }
 export const changeRowContent = (dispatch, getState, key, value, id) => {
-    const { videoContentRows: rows } = getState().global;
+    const { videoContentRows: rows, duration } = getState().global;
     if (key == 'dur') {
-        const duration = getTimeValuefromDuration(value);
-        dispatch(setStoreValue('duration', duration));
+        if (rows.length > 1) {
+            const _duration = getTimeValuefromDuration(getDurationSeconds(duration) - 60 + value);
+            console.log(getDurationSeconds(duration), _duration, value)
+            dispatch(setStoreValue('duration', _duration));
+        } else {
+            const _duration = getTimeValuefromDuration(value);
+            dispatch(setStoreValue('duration', _duration));
+        }
+
     }
     let newRows = [...rows];
     const rowItem = newRows.find(r => r.id == id);
@@ -51,11 +58,11 @@ export const changeItemToTimelineBox = (dispatch, getState, item, id) => {
     newRows = updateInArray(newRows, item => item.id == rowId, () => rowItem);
     let status = true;
     for (let i = 0; i < newRows.length; i++) {
-        for(let j = 0; j < newRows[i].tv_s.length; j++) {
-            if(!newRows[i].tv_s[j]) {
+        for (let j = 0; j < newRows[i].tv_s.length; j++) {
+            if (!newRows[i].tv_s[j]) {
                 status = false;
             }
-        }     
+        }
     }
     dispatch(setStoreValue('canDownload', status));
     dispatch({
@@ -76,6 +83,42 @@ export const getImages = (dispatch) => {
             }
         })
 };
+export const removeItem = (dispatch, getState, id, type) => {
+    switch (type) {
+        case 'image':
+            VideoServices.removeImage(id)
+                .then(r => {
+                    console.log(r);
+                    if (r.json.ERR == 0) {
+                        const { images } = getState().global;
+                        let newImages = [...images];
+                        newImages = removeFromArray(newImages, image => image.id == id);
+                        dispatch({
+                            type: types.GET_SUCCESS_IMAGES,
+                            images: newImages,
+                        });
+                    }
+                });
+            break;
+        case 'video':
+            break;
+        case 'product':
+            VideoServices.removeProduct(id)
+                .then(r => {
+                    if (r.json.ERR == 0) {
+                        const { products } = getState().global;
+                        let newProducts = [...products];
+                        newProducts = removeFromArray(newProducts, product => product.id == id);
+                        dispatch({
+                            type: types.GET_SUCCESS_PRODUCTS,
+                            products: newProducts,
+                        });
+                    }
+                });
+            break;
+    }
+
+}
 export const getProducts = (dispatch, id) => {
     VideoServices.getProductsForShop(id)
         .then(r => {
@@ -95,7 +138,7 @@ export const uploadMedia = (dispatch, getState, media) => {
     VideoServices.uploadMedia(form)
         .then(res => {
             if (res.json.ERR == 0) {
-                const key = Object.keys(res.json.DATA.model)[0]
+                const key = Object.keys(res.json.DATA.model)[0];
                 const image = res.json.DATA.model[key];
                 dispatch({
                     type: types.GET_SUCCESS_IMAGES,
@@ -143,8 +186,6 @@ export const getTvTemplates = (dispatch, id) => {
                 } else {
                     return message.error('Выберите шаблон.')
                 }
-
-
             }
         })
 };
