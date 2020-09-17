@@ -8,6 +8,7 @@ import { getTimeValuefromDuration, getDurationSeconds, getTypeOfDroppedItem } fr
 import DropTarget from './common/D_D/DropTarget';
 import DropedItem from './common/DropedItem';
 import RemoveItemPopup from './popups/RemoveItemPopup';
+import { ASSETS_PATH } from '../util/conf';
 
 
 const TimeLine = () => {
@@ -76,7 +77,7 @@ const TimeLine = () => {
             <Row className='timeline-body' ref={contentRef}>
                 <Col span={2} >
                     {screens_count.map(c => <div /*style={{ height: lineHeight }}*/ key={c} className='timeline-title-container'>
-                        <img src='/assets/images/icons/tv.svg' className='title-icon' />
+                        <img src={`${ASSETS_PATH}/images/icons/tv.svg`} className='title-icon' />
                         <span className='timeline-title'>{c}</span>
                     </div>)}
                 </Col>
@@ -92,7 +93,7 @@ const TimeLine = () => {
                                 >
                                     <div className='timeline-row-item'>
                                         <div className='empty-content-container'>
-                                            <img src='/assets/images/icons/add.svg' />
+                                            <img src={`${ASSETS_PATH}/images/icons/add.svg`} />
                                             <span>Перетащите</span>
                                             <span>сюда</span>
                                         </div>

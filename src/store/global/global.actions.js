@@ -3,13 +3,6 @@ import { updateInArray, getTimeValuefromDuration, removeFromArray, getDurationSe
 import VideoServices from '../../services/VideoServices';
 import { message } from 'antd';
 
-export const collapse = (status) => {
-    return {
-        type: types.COLLAPSED,
-        status
-    }
-};
-
 export const setStoreValue = (name, value) => {
     return {
         type: types.SET_STORE_VALUE,
@@ -80,6 +73,8 @@ export const getImages = (dispatch) => {
                     type: types.GET_SUCCESS_IMAGES,
                     images,
                 });
+            } else {
+                return message.error(r.json.DATA.err_mess);
             }
         })
 };
@@ -97,6 +92,8 @@ export const removeItem = (dispatch, getState, id, type) => {
                             type: types.GET_SUCCESS_IMAGES,
                             images: newImages,
                         });
+                    } else {
+                        return message.error(r.json.DATA.err_mess);
                     }
                 });
             break;
@@ -113,11 +110,12 @@ export const removeItem = (dispatch, getState, id, type) => {
                             type: types.GET_SUCCESS_PRODUCTS,
                             products: newProducts,
                         });
+                    } else {
+                        return message.error(r.json.DATA.err_mess);
                     }
                 });
             break;
     }
-
 }
 export const getProducts = (dispatch, id) => {
     VideoServices.getProductsForShop(id)
@@ -127,6 +125,8 @@ export const getProducts = (dispatch, id) => {
                     type: types.GET_SUCCESS_PRODUCTS,
                     products: r.json.DATA.model,
                 })
+            } else {
+                return message.error(r.json.DATA.err_mess);
             }
         });
 }
@@ -144,6 +144,8 @@ export const uploadMedia = (dispatch, getState, media) => {
                     type: types.GET_SUCCESS_IMAGES,
                     images: [...images, image],
                 });
+            } else {
+                return message.error(res.json.DATA.err_mess);
             }
         })
 };
@@ -199,6 +201,8 @@ export const getShops = (dispatch) => {
                     type: types.GET_SUCCESS_SHOPS,
                     shops: data,
                 });
+            } else {
+                return message.error(r.json.DATA.err_mess);
             }
         })
 };

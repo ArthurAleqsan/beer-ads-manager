@@ -23,8 +23,8 @@ const RemoveItemPopup = ({ visible, handleCancel, handleRemove }) => {
                     <span>удалить файл?</span>
                 </div>
                 <div className='modal-footer'>
-                    <button className='save-btn btn ' onClick={handleRemove}>Да, удалить</button>
-                    <button className='cancel-btn btn ' onClick={handleCancel}>Отмена</button>
+                    <button className='save-btn button ' onClick={handleRemove}>Да, удалить</button>
+                    <button className='cancel-btn button ' onClick={handleCancel}>Отмена</button>
                 </div>
             </div>
         </Modal>

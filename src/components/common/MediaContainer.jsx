@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RemoveBtn from './RemoveBtn';
 import RemoveItemPopup from '../popups/RemoveItemPopup';
-import { PUBLIC_PATH } from '../../util/conf';
+import { ASSETS_PATH, PUBLIC_PATH } from '../../util/conf';
 import { useDispatch, useStore } from 'react-redux';
 import { removeItem } from '../../store/global/global.actions';
 
@@ -28,7 +28,7 @@ const MediaContainer = ({ isImg, file }) => {
                 : <div className='video-container'>
                     <img src={`${PUBLIC_PATH}${image}`} className='content-media' />
                     <div className='video-bottom-container'>
-                        <img src='/assets/images/icons/player.svg' />
+                        <img src = {`${ASSETS_PATH}/images/icons/player.svg`} />
                         <span>00.10.00</span>
                     </div>
                 </div>

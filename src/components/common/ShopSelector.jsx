@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import { getParam } from '../../util/helpers';
 import { getProducts, setStoreValue } from '../../store/global/global.actions';
+import { ASSETS_PATH } from '../../util/conf';
 
 const { Option } = Select;
 
@@ -42,7 +43,7 @@ const ShopSelector = () => {
                 return <Option value={option.id} key={option.id}>
                     <div className='option-content' >
                         <div className='image-container'>
-                            <img src='/assets/images/icons/bl-shop.svg' className='select-icon' />
+                            <img src={`${ASSETS_PATH}/images/icons/bl-shop.svg`} className='select-icon' />
                         </div>
                         <div className='text-container'>
                             {option.name}

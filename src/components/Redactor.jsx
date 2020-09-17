@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import RedactorPriceContent from './common/RedactorPriceContent';
 import RedactorMediaCondtent from './common/RedactorMediaCondtent';
 import RedactorHeader from './common/RedactorHeader';
+import { ASSETS_PATH } from '../util/conf';
 
 
 
@@ -34,7 +35,7 @@ const Redactor = () => {
                     className={`header-nav-container ${activeTab == 'price' ? 'active-nav' : ''} ft-nav`}
                     onClick={() => handleNavigation('price')}
                 >
-                    {activeTab == 'price' && <img src='/assets/images/icons/TV-white.svg' className='icon' />}
+                    {activeTab == 'price' && <img src={`${ASSETS_PATH}/images/icons/TV-white.svg`} className='icon' />}
                     <span>Прайс</span>
                 </Col>
                 <Col
@@ -42,7 +43,7 @@ const Redactor = () => {
                     className={`header-nav-container ${activeTab == 'img' ? 'active-nav' : ''} sec-nav`}
                     onClick={() => handleNavigation('img')}
                 >
-                    {activeTab == 'img' && <img src='/assets/images/icons/TV-white.svg' className='icon' />}
+                    {activeTab == 'img' && <img src={`${ASSETS_PATH}/images/icons/TV-white.svg`} className='icon' />}
                     <span>Изображения</span>
                 </Col>
                 <Col
@@ -50,7 +51,7 @@ const Redactor = () => {
                     className={`header-nav-container ${activeTab == 'video' ? 'active-nav' : ''} th-nav`}
                     onClick={() => handleNavigation('video')}
                 >
-                    {activeTab == 'video' && <img src='/assets/images/icons/TV-white.svg' className='icon' />}
+                    {activeTab == 'video' && <img src={`${ASSETS_PATH}/images/icons/TV-white.svg`} className='icon' />}
                     <span>Видео</span>
                 </Col>
             </Row>

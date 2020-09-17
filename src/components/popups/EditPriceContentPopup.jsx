@@ -108,9 +108,9 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
                 </DragDropContext>
             </Row>
             <div className='modal-footer buttons-container'>
-                <button className='btn cancel-btn' onClick={handleCancelChanges}>Отмена</button>
+                <button className='button cancel-btn' onClick={handleCancelChanges}>Отмена</button>
                 <button
-                    className={`btn save-btn yellow-btn ${canSave ? '' : 'disabled-btn'}`}
+                    className={`button save-btn yellow-btn ${canSave ? '' : 'disabled-btn'}`}
                     onClick={handlSave}
                     disabled={!canSave}
                 >Сохранить</button>

@@ -52,10 +52,10 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/list-shop', options }, true);
     }
-    getProductsForShop(id) {
+    getProductsForShop(id, tvtemplate = 1) {
         const options = {
             method: 'POST',
-            body: JSON.stringify({ shop: [id] })
+            body: JSON.stringify({ shop: [id], tvtemplate })
         };
         return this.send({ path: '/list-product', options }, true);
     }

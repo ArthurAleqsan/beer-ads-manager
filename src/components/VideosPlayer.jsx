@@ -4,6 +4,7 @@ import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 import PlayerTv from './common/PlayerTv';
 import { getTimeValuefromDuration } from '../util/helpers';
 import { generateVideo } from '../store/global/global.actions';
+import { ASSETS_PATH } from '../util/conf';
 
 const VideosPlayer = () => {
     const { tvCount } = useSelector(s => s.global, shallowEqual);
@@ -78,15 +79,15 @@ const VideosPlayer = () => {
             </div>
             <div className='video-controls-container'>
                 <button className='preview-btn' onClick={handleGenerate}>
-                    <img src='/assets/images/icons/ellipse.svg' className='dot' />
+                    <img src={`${ASSETS_PATH}/images/icons/ellipse.svg`} className='dot' />
                     <span className='text'>Предпросмотр</span>
                 </button>
                 <div className='video-controls-container'>
                     <div className='centered-row'>
                         <div className='control-buttons-container'>
-                            <img src='/assets/images/icons/play.svg' className='controls-buttons' onClick={play} />
-                            <img src='/assets/images/icons/pause.svg' className='controls-buttons' onClick={() => pause_stop(false)} />
-                            {isPlaying ? <div className='controls-buttons active-btn' onClick={() => pause_stop(true)}></div> : <img src='/assets/images/icons/stop.svg'
+                            <img src={`${ASSETS_PATH}/images/icons/play.svg`} className='controls-buttons' onClick={play} />
+                            <img src={`${ASSETS_PATH}/images/icons/pause.svg`} className='controls-buttons' onClick={() => pause_stop(false)} />
+                            {isPlaying ? <div className='controls-buttons active-btn' onClick={() => pause_stop(true)}></div> : <img src={`${ASSETS_PATH}/images/icons/stop.svg`}
                                 className='controls-buttons'
                             />}
                         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useStore } from 'react-redux';
 import { changeRowContent } from '../../store/global/global.actions';
+import { ASSETS_PATH } from '../../util/conf';
 
 const SecondsInput = ({ data }) => {
     const dispatch = useDispatch();
@@ -25,8 +26,8 @@ const SecondsInput = ({ data }) => {
                 <span>s</span>
             </div>
             <div className='arrow-buttons-container'>
-                <img src='/assets/images/icons/arrow_drop_up.svg' onClick={() => handleArrowClick(true)} />
-                <img src='/assets/images/icons/arrow_drop_down.svg' onClick={() => handleArrowClick(false)} />
+                <img src={`${ASSETS_PATH}/images/icons/arrow_drop_up.svg`} onClick={() => handleArrowClick(true)} />
+                <img src={`${ASSETS_PATH}/images/icons/arrow_drop_down.svg`} onClick={() => handleArrowClick(false)} />
             </div>
         </div>
     )
