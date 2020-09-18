@@ -67,7 +67,7 @@ const config = {
         new HtmlWebpackPlugin({
             template: './index.html',
             googleAnalitic: env === 'production' ? `<script></script>` : '',
-            title: 'GodsSides'
+            title: 'ХМ'
         }),
         new MiniCssExtractPlugin({
             filename: "[name]-[hash].css",

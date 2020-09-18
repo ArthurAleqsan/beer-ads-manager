@@ -13,17 +13,23 @@ import ScheduleItem from '../common/schedule/ScheduleItem';
 const EditPriceContentPopup = ({ visible, handleCancel }) => {
     const { tvCount, selectedShop, products } = useSelector(s => s.global, shallowEqual);
     const [localSelectedShop, setLocalSelectedShop] = useState(null);
-    const tvS = [];
+    const [tvS, setTV_S] = useState([]);
     useEffect(() => {
         setLocalSelectedShop(selectedShop);
     }, []);
-    for (let i = 0; i < tvCount; i++) {
-        const obj = {
-            name: `TV ${i + 1}`,
-            products
+    useEffect(() => {
+        for (let i = 0; i < tvCount; i++) {
+            const obj = {
+                name: `TV ${i + 1}`,
+                products_1: products && products.filter(p => p.screen == 1),
+                products_2: products && products.filter(p => p.screen == 2),
+                products_3: products && products.filter(p => p.screen == 3),
+                all_products: products && products.filter(p => !p.screen),
+            }
+            tvS.push(obj);
         }
-        tvS.push(obj);
-    }
+    }, [products]);
+
     const handleChange = (e) => {
         setLocalSelectedShop(e.target.value);
     };
@@ -71,6 +77,7 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
             <Row className={`modal-body ${tvCount > 2 ? 'multicol-content' : 'mincol-content'}`}>
                 <DragDropContext>
                     {tvS.map((obj, i) => {
+                        console.log(obj);
                         return <Col span={colSpan} className={'content-col'} key={name}>
                             <ScheduleColHeader
                                 name={obj.name}
@@ -82,7 +89,8 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
                                             ref={provided.innerRef}
                                             {...provided.droppableProps}
                                         >
-                                            {obj.products.map((product, j) => {
+                                            {obj.all_products && obj.all_products.map((product, j) => {
+                                                console.log(product);
                                                 return <>
                                                     <Draggable draggableId={`draggable-${(i + 1)+'_'+(j + 1)}`} index={j}>
                                                         {(provided, snapshot) => (
