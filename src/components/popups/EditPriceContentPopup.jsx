@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Row, Col } from 'antd';
+import { Modal, Row, Col, message } from 'antd';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
@@ -8,7 +8,7 @@ import RedactorHeader from '../common/RedactorHeader';
 import ShopSelector from '../common/ShopSelector';
 import ScheduleColHeader from '../common/schedule/ScheduleColHeader';
 import ScheduleItem from '../common/schedule/ScheduleItem';
-
+import { reorder, move } from './helpers';
 
 const EditPriceContentPopup = ({ visible, handleCancel }) => {
     const { tvCount, selectedShop, products } = useSelector(s => s.global, shallowEqual);
@@ -18,12 +18,12 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
     useEffect(() => {
         setLocalSelectedShop(selectedShop);
     }, []);
-    if(products && !product) {
+    if (products && !product) {
         const _ = [];
         const obj = {
-            all_products: products.filter(p => p.screen == null),
+            product_0: products.filter(p => p.screen == null),
         }
-        for(let i = 1; i < tvCount + 1; i++) {
+        for (let i = 1; i < tvCount + 1; i++) {
             _.push(`TV-${i}`);
             obj[`product_${i}`] = products.filter(p => p.screen == i);
         }
@@ -31,19 +31,10 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
         setProduct(obj);
     }
 
-
     const handleChange = (e) => {
         setLocalSelectedShop(e.target.value);
     };
-    let colSpan = 6;
-    console.log(tvCount);
-    if (24 / (tvCount + 1) < 6) {
-        console.log(8888);
-        colSpan = 24 / tvCount - 1;
-    } else if (24 / (+tvCount + 1) == 6) {
-        console.log(7896);
-        colSpan = 6;
-    }
+
     const handleCancelChanges = () => {
         handleCancel();
     };
@@ -51,7 +42,32 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
         console.log('saved');
     };
     const canSave = true;
-    
+
+    const handleDragEnd = (result) => {
+        const { source, destination } = result;
+        
+        // dropped outside the list
+        if (!destination) {
+            message.error('You dropped outside the list');
+            return;
+        }
+        const sInd = +source.droppableId.split('droppable-')[1];
+        const dInd = +destination.droppableId.split('droppable-')[1];
+
+        if (sInd == dInd) {
+            const items = reorder(product[`product_${sInd}`], source.index, destination.index);
+            setProduct({ ...product, [`product_${sInd}`]: items });
+        } else {
+            const result = move(product[`product_${sInd}`], product[`product_${dInd}`], source, destination);
+
+            setProduct({
+                ...product,
+                [`product_${sInd}`]: [...result[`droppable-${sInd}`]],
+                [`product_${dInd}`]: [...result[`droppable-${dInd}`]],
+            });
+        }
+    }
+
     return (
         selectedShop && <Modal
             visible={visible}
@@ -59,7 +75,6 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
             header={null}
             closable={false}
             className='edit-priceContent-modal'
-            centered={true}
             maskClosable={true}
             onCancel={handleCancel}
         >
@@ -82,59 +97,58 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
             </div>
             <Row className={`modal-body multicol-content`}>
                 <DragDropContext
-                onDragEnd = {(r) => console.log(r)}
+                    onDragEnd={(r) => handleDragEnd(r)}
                 >
-                    <div style={{width: 100 / (tvCount + 1) - 2 + '%'}} className={'content-col'} key={name}>
+                    <div style={{ width: 100 / (tvCount + 1) - 2 + '%' }} className={'content-col'} key={name}>
                         <ScheduleColHeader
                             name='Не сортированные'
                         />
-                            <div className='schedule-items-container'>
-                                <Droppable droppableId={`droppable-0`}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.droppableProps}
-                                        >
-                                            {product.all_products && product.all_products.map((product, j) => {
-                                                return <>
-                                                    <Draggable draggableId={`draggable-0_${(j + 1)}`} index={j}>
-                                                        {(provided, snapshot) => (
-                                                            <div
-                                                                ref={provided.innerRef}
-                                                                {...provided.draggableProps}
-                                                                {...provided.dragHandleProps}
-                                                            >
-                                                                <ScheduleItem item={product} />
-                                                            </div>
-                                                        )}
-                                                    </ Draggable>
-                                                    {provided.placeholder}
-                                                </>
-                                            })}
+                        <div className='schedule-items-container'>
+                            <Droppable droppableId={`droppable-0`}>
+                                {(provided ) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                    >
+                                        {product.product_0 && product.product_0.map((product, j) => {
+                                            return <>
+                                                <Draggable draggableId={`draggable-0_${(j + 1)}`} index={j}>
+                                                    {(provided) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                        >
+                                                            <ScheduleItem item={product} />
+                                                        </div>
+                                                    )}
+                                                </ Draggable>
+                                                {provided.placeholder}
+                                            </>
+                                        })}
 
-                                        </div>
-                                    )}
-                                </Droppable>
-                            </div>
+                                    </div>
+                                )}
+                            </Droppable>
                         </div>
-                    
+                    </div>
+
                     {tvS.map((name, i) => {
-                        console.log(colSpan);
-                        return <div style={{width: 100 / (tvCount + 1) - 2 + '%'}} className={'content-col'} key={name}>
+                        return <div style={{ width: 100 / (tvCount + 1) - 2 + '%' }} className={'content-col'} key={name}>
                             <ScheduleColHeader
                                 name={name}
                             />
                             <div className='schedule-items-container'>
                                 <Droppable droppableId={`droppable-${i + 1}`}>
-                                    {(provided, snapshot) => (
+                                    {(provided) => (
                                         <div
                                             ref={provided.innerRef}
                                             {...provided.droppableProps}
                                         >
-                                            {product[`product_${i+1}`] && product[`product_${i+1}`].map((p, j) => {
+                                            {product[`product_${i + 1}`].map((p, j) => {
                                                 return <>
-                                                    <Draggable draggableId={`draggable-${(i + 1)+'_'+(j + 1)}`} index={j}>
-                                                        {(provided, snapshot) => (
+                                                    <Draggable draggableId={`draggable-${(i + 1) + '_' + (j + 1)}`} index={j}>
+                                                        {(provided) => (
                                                             <div
                                                                 ref={provided.innerRef}
                                                                 {...provided.draggableProps}

@@ -1,7 +1,9 @@
 .edit-priceContent-modal {
     // background: #F7FAFC;
+    width: 80vw!important;
     min-width: 70%;
     .ant-modal-content {
+        width: 80vw;
         .ant-modal-body {
             background: #f7fafc;
         }
@@ -40,6 +42,10 @@
             }
             .schedule-items-container {
                 background: #fff;
+                height: 100%;
+                & > div {
+                    height: 100%;
+                }
             }
             .schedule-item-container {
                 display: flex;
@@ -94,7 +100,7 @@
         .multicol-content {
             justify-content: space-between;
             .content-col {
-                max-width: 250px;
+                max-width: 350px;
             }
         }
         .modal-footer {
