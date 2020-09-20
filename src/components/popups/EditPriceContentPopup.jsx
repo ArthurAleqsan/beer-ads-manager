@@ -13,31 +13,36 @@ import ScheduleItem from '../common/schedule/ScheduleItem';
 const EditPriceContentPopup = ({ visible, handleCancel }) => {
     const { tvCount, selectedShop, products } = useSelector(s => s.global, shallowEqual);
     const [localSelectedShop, setLocalSelectedShop] = useState(null);
-    const [tvS, setTV_S] = useState([]);
+    const [tvS, setTvS] = useState([]);
+    const [product, setProduct] = useState(null);
     useEffect(() => {
         setLocalSelectedShop(selectedShop);
     }, []);
-    useEffect(() => {
-        for (let i = 0; i < tvCount; i++) {
-            const obj = {
-                name: `TV ${i + 1}`,
-                products_1: products && products.filter(p => p.screen == 1),
-                products_2: products && products.filter(p => p.screen == 2),
-                products_3: products && products.filter(p => p.screen == 3),
-                all_products: products && products.filter(p => !p.screen),
-            }
-            tvS.push(obj);
+    if(products && !product) {
+        const _ = [];
+        const obj = {
+            all_products: products.filter(p => p.screen == null),
         }
-    }, [products]);
+        for(let i = 1; i < tvCount + 1; i++) {
+            _.push(`TV-${i}`);
+            obj[`product_${i}`] = products.filter(p => p.screen == i);
+        }
+        setTvS(_);
+        setProduct(obj);
+    }
+
 
     const handleChange = (e) => {
         setLocalSelectedShop(e.target.value);
     };
-    let colSpan = 8;
-    if (24 / tvCount < 8) {
+    let colSpan = 6;
+    console.log(tvCount);
+    if (24 / (tvCount + 1) < 6) {
+        console.log(8888);
         colSpan = 24 / tvCount - 1;
-    } else if (24 / tvCount == 8) {
-        colSpan = 7;
+    } else if (24 / (+tvCount + 1) == 6) {
+        console.log(7896);
+        colSpan = 6;
     }
     const handleCancelChanges = () => {
         handleCancel();
@@ -46,6 +51,7 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
         console.log('saved');
     };
     const canSave = true;
+    
     return (
         selectedShop && <Modal
             visible={visible}
@@ -74,25 +80,24 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
                     <ShopSelector />
                 </div>
             </div>
-            <Row className={`modal-body ${tvCount > 2 ? 'multicol-content' : 'mincol-content'}`}>
-                <DragDropContext>
-                    {tvS.map((obj, i) => {
-                        console.log(obj);
-                        return <Col span={colSpan} className={'content-col'} key={name}>
-                            <ScheduleColHeader
-                                name={obj.name}
-                            />
+            <Row className={`modal-body multicol-content`}>
+                <DragDropContext
+                onDragEnd = {(r) => console.log(r)}
+                >
+                    <div style={{width: 100 / (tvCount + 1) - 2 + '%'}} className={'content-col'} key={name}>
+                        <ScheduleColHeader
+                            name='Не сортированные'
+                        />
                             <div className='schedule-items-container'>
-                                <Droppable droppableId={`droppable-${i + 1}`}>
+                                <Droppable droppableId={`droppable-0`}>
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
                                             {...provided.droppableProps}
                                         >
-                                            {obj.all_products && obj.all_products.map((product, j) => {
-                                                console.log(product);
+                                            {product.all_products && product.all_products.map((product, j) => {
                                                 return <>
-                                                    <Draggable draggableId={`draggable-${(i + 1)+'_'+(j + 1)}`} index={j}>
+                                                    <Draggable draggableId={`draggable-0_${(j + 1)}`} index={j}>
                                                         {(provided, snapshot) => (
                                                             <div
                                                                 ref={provided.innerRef}
@@ -111,7 +116,43 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
                                     )}
                                 </Droppable>
                             </div>
-                        </Col>
+                        </div>
+                    
+                    {tvS.map((name, i) => {
+                        console.log(colSpan);
+                        return <div style={{width: 100 / (tvCount + 1) - 2 + '%'}} className={'content-col'} key={name}>
+                            <ScheduleColHeader
+                                name={name}
+                            />
+                            <div className='schedule-items-container'>
+                                <Droppable droppableId={`droppable-${i + 1}`}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps}
+                                        >
+                                            {product[`product_${i+1}`] && product[`product_${i+1}`].map((p, j) => {
+                                                return <>
+                                                    <Draggable draggableId={`draggable-${(i + 1)+'_'+(j + 1)}`} index={j}>
+                                                        {(provided, snapshot) => (
+                                                            <div
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                            >
+                                                                <ScheduleItem item={p} />
+                                                            </div>
+                                                        )}
+                                                    </ Draggable>
+                                                    {provided.placeholder}
+                                                </>
+                                            })}
+
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </div>
+                        </div>
                     })}
                 </DragDropContext>
             </Row>

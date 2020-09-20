@@ -12,7 +12,7 @@ import { getShops, getTvTemplates } from '../../store/global/global.actions';
 
 const VideoRedactor = () => {
     // TO DO get id from location
-    console.log(window.location);
+
     const id = 1;
     const dispatch = useDispatch();
     useEffect(() => {

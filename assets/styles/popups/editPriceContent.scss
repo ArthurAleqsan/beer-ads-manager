@@ -93,10 +93,8 @@
         }
         .multicol-content {
             justify-content: space-between;
-        }
-        .mincol-content {
             .content-col {
-                margin-right: 10px;
+                max-width: 250px;
             }
         }
         .modal-footer {
