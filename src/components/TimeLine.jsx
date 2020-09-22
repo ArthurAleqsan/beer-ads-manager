@@ -44,7 +44,7 @@ const TimeLine = () => {
             dispatch(setStoreValue('duration', getTimeValuefromDuration(60)));
         }
     };
-    const [items, setItems] = React.useState([]);
+    const [items, setItems] = useState([]);
 
 
     const itemDropped = item => setItems([...items, item]);

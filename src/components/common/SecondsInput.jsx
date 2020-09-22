@@ -11,7 +11,7 @@ const SecondsInput = ({ data }) => {
        changeRowContent(dispatch, getState, 'dur', e.target.value, data.id);
     };
     const handleArrowClick = (isIncrease) => {
-        const dur = isIncrease ? data.dur + 1 : data.dur - 1;
+        const dur = isIncrease ? +data.dur + 1 : +data.dur - 1;
         changeRowContent(dispatch, getState, 'dur', dur, data.id);
     };
     return (

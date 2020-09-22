@@ -19,17 +19,17 @@ export const addNewRow = (dispatch, row) => {
     });
 }
 export const changeRowContent = (dispatch, getState, key, value, id) => {
-    const { videoContentRows: rows, duration } = getState().global;
+    const { videoContentRows: rows } = getState().global;
     if (key == 'dur') {
         if (rows.length > 1) {
-            const _duration = getTimeValuefromDuration(getDurationSeconds(duration) - 60 + value);
-            console.log(getDurationSeconds(duration), _duration, value)
-            dispatch(setStoreValue('duration', _duration));
+            const rowItem = rows.find(r => r.id == id);
+            const newRows = updateInArray(rows, r => r.id == id, () => ({...rowItem, dur: +value}));
+            const _duration = newRows.reduce((a, c) => +a.dur + +c.dur);
+            dispatch(setStoreValue('duration', getTimeValuefromDuration(_duration)));
         } else {
             const _duration = getTimeValuefromDuration(value);
             dispatch(setStoreValue('duration', _duration));
         }
-
     }
     let newRows = [...rows];
     const rowItem = newRows.find(r => r.id == id);
