@@ -7,7 +7,12 @@ import { generateVideo } from '../store/global/global.actions';
 import { ASSETS_PATH } from '../util/conf';
 
 const VideosPlayer = () => {
-    const { tvCount } = useSelector(s => s.global, shallowEqual);
+    const { tvCount, generatedVideo } = useSelector(s => s.global, shallowEqual);
+    const duration = generatedVideo?.duration;
+    const rows = generatedVideo?.rows;
+
+    const [selectedRow, setSelectedRow] = useState(0);
+
     const tvS = [];
     const dispatch = useDispatch();
     const { getState } = useStore();
@@ -62,9 +67,23 @@ const VideosPlayer = () => {
         }
         setIsPlaying(false);
     };
+    let status = false;
     const handleGenerate = () => {
         generateVideo(dispatch, getState);
+        // status = true;
+        // saveVideo(dispatch, getState);
     };
+    if(rows) {
+        console.log(23456);
+        console.log(rows);
+        // for(let i = 0; i < rows.length; i++) {
+        //     setTimeout(() => {
+        //         console.log(rows[i + 1]);
+        //         setSelectedRow(i + 1)
+        //     }, 1000);
+        // }
+        status = false; 
+    }
 
 
     return (
@@ -74,7 +93,13 @@ const VideosPlayer = () => {
             </div>
             <div className='videos-player-container'>
                 {tvS.map((name, i) => {
-                    return <PlayerTv key={i} count={tvCount} name={name} id={i + 1} />
+                    return <PlayerTv
+                        key={i}
+                        count={tvCount}
+                        name={name}
+                        id={i + 1}
+                        media={rows && rows[selectedRow] && rows[selectedRow].tv_s[i]}
+                    />
                 })}
             </div>
             <div className='video-controls-container'>
@@ -98,7 +123,7 @@ const VideosPlayer = () => {
                         <div className='duration-container'>
                             <span>{getTimeValuefromDuration(currentTime)}</span>
                             <span className='divider'>/</span>
-                            <span>{getTimeValuefromDuration(20)}</span>
+                            <span>{duration || getTimeValuefromDuration(0)}</span>
                         </div>
                     </div>
                 </div>

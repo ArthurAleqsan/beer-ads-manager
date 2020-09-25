@@ -10,6 +10,7 @@ const initialState = {
     shops: null,
     products: null,
     selectedShop: null,
+    generatedVideo: null,
 };
 
 const globalReducer = (state = initialState, action) => {
@@ -18,6 +19,11 @@ const globalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 images: action.images,
+            }
+        case types.SET_GENERATED_VIDEO:
+            return {
+                ...state,
+                generatedVideo: action.generatedVideo,
             }
         case types.SET_STORE_VALUE:
             return {

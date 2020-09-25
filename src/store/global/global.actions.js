@@ -2,6 +2,7 @@ import * as types from './../types';
 import { updateInArray, getTimeValuefromDuration, removeFromArray, getDurationSeconds } from '../../util/helpers';
 import VideoServices from '../../services/VideoServices';
 import { message } from 'antd';
+import { validateRows } from '../../util/validatores';
 
 export const setStoreValue = (name, value) => {
     return {
@@ -23,7 +24,7 @@ export const changeRowContent = (dispatch, getState, key, value, id) => {
     if (key == 'dur') {
         if (rows.length > 1) {
             const rowItem = rows.find(r => r.id == id);
-            const newRows = updateInArray(rows, r => r.id == id, () => ({...rowItem, dur: +value}));
+            const newRows = updateInArray(rows, r => r.id == id, () => ({ ...rowItem, dur: +value }));
             const _duration = newRows.reduce((a, c) => +a.dur + +c.dur);
             dispatch(setStoreValue('duration', getTimeValuefromDuration(_duration)));
         } else {
@@ -40,6 +41,7 @@ export const changeRowContent = (dispatch, getState, key, value, id) => {
     });
 };
 
+
 export const changeItemToTimelineBox = (dispatch, getState, item, id) => {
     const { videoContentRows: rows } = getState().global;
     const splitedId = id.split('_');
@@ -49,14 +51,7 @@ export const changeItemToTimelineBox = (dispatch, getState, item, id) => {
     const rowItem = newRows.find(r => r.id == rowId);
     rowItem.tv_s.splice(+colId - 1, 1, item);
     newRows = updateInArray(newRows, item => item.id == rowId, () => rowItem);
-    let status = true;
-    for (let i = 0; i < newRows.length; i++) {
-        for (let j = 0; j < newRows[i].tv_s.length; j++) {
-            if (!newRows[i].tv_s[j]) {
-                status = false;
-            }
-        }
-    }
+    const status = validateRows(newRows);
     dispatch(setStoreValue('canDownload', status));
     dispatch({
         type: types.ROW_CHANGED,
@@ -151,6 +146,25 @@ export const uploadMedia = (dispatch, getState, media) => {
 };
 
 export const generateVideo = (dispatch, getState) => {
+    const { videoContentRows: rows, tvCount, duration } = getState().global;
+    if(!rows) {
+        return message.error('Выберите файли для генерации видео');
+    }
+    if (!validateRows(rows)) {
+        return message.error('Надо заполнить все ячейки');
+    }
+    const generatedVideo = {
+        duration,
+        rows,
+    };
+    dispatch({
+        type: types.SET_GENERATED_VIDEO,
+        generatedVideo
+    })
+    console.log(rows)
+}
+
+export const saveVideo = (dispatch, getState) => {
     const { videoContentRows, tvCount } = getState().global;
     const screens = new Array(tvCount);
     const rows = [];
