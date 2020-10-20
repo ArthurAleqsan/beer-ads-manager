@@ -26,7 +26,7 @@ const VideoRedactor = () => {
             <Col span={10}>
                 <Redactor />
             </Col>
-            <Col span={13} offset={1}>
+            <Col span={13} >
                 <VideosPlayer />
             </Col>
         </Row>
