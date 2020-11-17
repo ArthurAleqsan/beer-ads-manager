@@ -20,9 +20,9 @@ const Header = () => {
                 <span className='header-title'>Создать видео</span>
             </div>
             <div className='recorder-header-right-row'>
-                <button className='button save-btn' onClick={handleSave}>Сохранить</button>
+                <button className='react-button save-btn' onClick={handleSave}>Сохранить</button>
                 <button
-                    className={`button download-btn yellow-btn ${canDownload ? '' : 'disabled-btn'}`}
+                    className={`react-button download-btn yellow-btn ${canDownload ? '' : 'disabled-btn'}`}
                     onClick={handlDownload}
                     disabled={!canDownload}
                 >Скачать</button>

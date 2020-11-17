@@ -26,7 +26,7 @@ const MediaContainer = ({ isImg, file }) => {
             {isImg
                 ? <img src={`${PUBLIC_PATH}${image}`} className='content-media' />
                 : <div className='video-container'>
-                    <img src={`${PUBLIC_PATH}${image}`} className='content-media' />
+                    <img src={`${PUBLIC_PATH}/${image}`} className='content-media' /> 
                     <div className='video-bottom-container'>
                         <img src = {`${ASSETS_PATH}/images/icons/player.svg`} />
                         <span>00.10.00</span>

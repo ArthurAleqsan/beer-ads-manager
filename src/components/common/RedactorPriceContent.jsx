@@ -19,7 +19,7 @@ const RedactorPriceContent = () => {
 
     return (
         <div className='price-container-content redactor-content'>
-            <button className='yellow-btn button' onClick={toogleModal}>Редактировать прайс</button>
+            <button className='yellow-btn react-button' onClick={toogleModal}>Редактировать прайс</button>
             <div className='shop-selector-container'>
                 <ShopSelector />
             </div>

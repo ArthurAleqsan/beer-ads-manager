@@ -23,13 +23,14 @@ $redactor-content-padding: 12px;
 .main-content {
     padding: 0 35px;
 }
-.button {
+.react-button {
     color: #333;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
     font-size: 20px;
     line-height: 23px;
+    font-family: Roboto!important;
 }
 .yellow-btn {
     background: $hero-yellow;
