@@ -13,6 +13,7 @@ const MediaContainer = ({ isImg, file }) => {
     const { getState } = useStore();
     const handleRemove = () => {
         removeItem(dispatch, getState, id, isImg ? 'image' : 'video');
+        setVisibility(false);
     };
     const openRemoveModal = () => {
         setVisibility(true);
@@ -28,7 +29,7 @@ const MediaContainer = ({ isImg, file }) => {
                 : <div className='video-container'>
                     <img src={`${PUBLIC_PATH}/${image}`} className='content-media' /> 
                     <div className='video-bottom-container'>
-                        <img src = {`${ASSETS_PATH}/images/icons/player.svg`} />
+                        <img src={`${ASSETS_PATH}/images/icons/player.svg`} />
                         <span>00.10.00</span>
                     </div>
                 </div>
@@ -44,7 +45,7 @@ const MediaContainer = ({ isImg, file }) => {
     )
 };
 MediaContainer.propTypes = {
-    isImg: PropTypes.bool.isRequired,
+    isImg: PropTypes.bool,
     file: PropTypes.object.isRequired,
 };
 export default MediaContainer;

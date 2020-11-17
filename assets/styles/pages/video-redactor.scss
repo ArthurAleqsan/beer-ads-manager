@@ -27,9 +27,13 @@
             .save-btn {
                 background-color: #ffffff;
                 border: 1px solid $hero-yellow;
+                width: $BT-Width;
+                height: $BT-Height;
             }
             .download-btn {
                 margin-left: 24px;
+                width: $BT-Width;
+                height: $BT-Height;
             }
         }
     }

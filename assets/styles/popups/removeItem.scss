@@ -7,7 +7,8 @@
             font-weight: 500;
             font-size: 20px;
             line-height: 23px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
             color: #333;
             border-bottom: 1px solid #e5e5e5;
             padding: 23px;
@@ -35,10 +36,12 @@
             }
             .cancel-btn {
                 background: #f5f5f5;
+                width: 100%;
             }
             .save-btn {
                 background: #ff3333;
                 color: #fff;
+                width: 100%;
             }
         }
     }

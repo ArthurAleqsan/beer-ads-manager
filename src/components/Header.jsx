@@ -11,6 +11,7 @@ const Header = () => {
         console.log('saved');
     };
     const handlDownload = () => {
+        console.log(7);
         setDownloadModalVisible(true);
     }
     return (

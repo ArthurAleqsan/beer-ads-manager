@@ -1,6 +1,8 @@
 $BG_Color: #f7fafc;
 $hero-yellow: #fbd436;
-$redactor-content-padding: 12px;
+$redactor-content-padding: 5px;
+$BT-Width: 150px;
+$BT-Height: 48px;
 
 :root {
     --BG_Color: #{$BG_Color};
@@ -22,6 +24,7 @@ $redactor-content-padding: 12px;
 }
 .main-content {
     padding: 0 35px;
+    justify-content: space-between;
 }
 .react-button {
     color: #333;
@@ -59,6 +62,7 @@ $redactor-content-padding: 12px;
     cursor: pointer;
     .remove-icon {
         width: 12px;
+        object-fit: contain;
     }
 }
 .main-footer {
@@ -92,7 +96,7 @@ $redactor-content-padding: 12px;
     .ant-select-selector {
         min-height: 48px;
         .ant-select-selection-item {
-            line-height: 45px!important;
+            line-height: 45px !important;
         }
     }
 }
