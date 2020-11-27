@@ -1,7 +1,7 @@
 import * as types from './../types';
 
 const initialState = {
-    tvCount: 2,
+    tvCount: 1,
     videoContentRows: null,
     duration: '00:00:00',
     canDownload: false,

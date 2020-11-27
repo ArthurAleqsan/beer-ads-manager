@@ -49,6 +49,7 @@ class VideoServices extends Request {
     getShops() {
         const options = {
             method: 'POST',
+            body: JSON.stringify({ TvtemplateSearch: { id: 1 } })
         };
         return this.send({ path: '/list-shop', options }, true);
     }
@@ -59,10 +60,10 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/list-product', options }, true);
     }
-    getShopsTemplatesList(id) {
+    getShopsTemplatesList(tvtemplate) {
         const options = {
             method: 'POST',
-            body: JSON.stringify({ tvtemplate: id })
+            body: JSON.stringify({ tvtemplate })
         };
         return this.send({ path: '/list-temlatetoshops', options }, true);
     }

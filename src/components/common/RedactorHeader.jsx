@@ -6,6 +6,7 @@ import { ASSETS_PATH } from '../../util/conf';
 
 const RedactorHeader = () => {
     const { tvTemplate } = useSelector(s => s.global, shallowEqual);
+    console.log(tvTemplate);
 
     return (
         <Row className='redactor-header'>

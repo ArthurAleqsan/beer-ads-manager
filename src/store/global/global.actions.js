@@ -1,5 +1,5 @@
 import * as types from './../types';
-import { updateInArray, getTimeValuefromDuration, removeFromArray, getDurationSeconds } from '../../util/helpers';
+import { updateInArray, getTimeValuefromDuration, removeFromArray, getDurationSeconds, getParam } from '../../util/helpers';
 import VideoServices from '../../services/VideoServices';
 import { message } from 'antd';
 import { validateRows } from '../../util/validatores';
@@ -188,6 +188,7 @@ export const saveVideo = (dispatch, getState) => {
 export const getTvTemplates = (dispatch, id) => {
     VideoServices.getTvTemplates(id)
         .then(r => {
+            console.log(r)
             if (r.json.ERR == 0) {
                 if (Object.keys(r.json.DATA.model.length == 1)) {
                     Object.keys(r.json.DATA.model).forEach(k => {
@@ -195,7 +196,7 @@ export const getTvTemplates = (dispatch, id) => {
                         dispatch({
                             type: types.SET_TV_TEMPLATE,
                             tvTemplate: template,
-                            tvCount: template.screens,
+                            tvCount: template.screens, 
                         });
 
                     })
@@ -206,9 +207,10 @@ export const getTvTemplates = (dispatch, id) => {
         })
 };
 
-export const getShops = (dispatch) => {
-    VideoServices.getShops()
+export const getShops = (dispatch, id) => {
+    VideoServices.getShopsTemplatesList(id)
         .then(r => {
+            console.log(r)
             if (r.json.ERR == 0) {
                 const data = r.json.DATA.model;
                 dispatch({
@@ -217,7 +219,7 @@ export const getShops = (dispatch) => {
                 });
             } else {
                 return message.error(r.json.DATA.err_mess);
-            }
+            }   
         })
 };
 export const getShopTemplates = (dispatch, id) => {
