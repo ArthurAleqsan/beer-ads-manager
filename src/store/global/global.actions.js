@@ -112,8 +112,8 @@ export const removeItem = (dispatch, getState, id, type) => {
             break;
     }
 }
-export const getProducts = (dispatch, id) => {
-    VideoServices.getProductsForShop(id)
+export const getProducts = (dispatch, id, tvtemplate) => {
+    VideoServices.getProductsForShop(id, tvtemplate)
         .then(r => {
             if (r.json.ERR == 0) {
                 dispatch({
@@ -147,7 +147,7 @@ export const uploadMedia = (dispatch, getState, media) => {
 
 export const generateVideo = (dispatch, getState) => {
     const { videoContentRows: rows, tvCount, duration } = getState().global;
-    if(!rows) {
+    if (!rows) {
         return message.error('Выберите файли для генерации видео');
     }
     if (!validateRows(rows)) {
@@ -196,7 +196,7 @@ export const getTvTemplates = (dispatch, id) => {
                         dispatch({
                             type: types.SET_TV_TEMPLATE,
                             tvTemplate: template,
-                            tvCount: template.screens, 
+                            tvCount: template.screens,
                         });
 
                     })
@@ -210,16 +210,16 @@ export const getTvTemplates = (dispatch, id) => {
 export const getShops = (dispatch, id) => {
     VideoServices.getShopsTemplatesList(id)
         .then(r => {
-            console.log(r)
             if (r.json.ERR == 0) {
-                const data = r.json.DATA.model;
+                const { shops } = r.json.DATA;
+                console.log('is data ', r.json.DATA)
                 dispatch({
                     type: types.GET_SUCCESS_SHOPS,
-                    shops: data,
+                    shops
                 });
             } else {
                 return message.error(r.json.DATA.err_mess);
-            }   
+            }
         })
 };
 export const getShopTemplates = (dispatch, id) => {

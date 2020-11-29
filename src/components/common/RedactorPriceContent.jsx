@@ -15,15 +15,13 @@ import { getParam } from '../../util/helpers';
 const RedactorPriceContent = () => {
     const [visible, setVisible] = useState(false);
     const dispatch = useDispatch();
-    // const { search } = useLocation();
+    const { search } = useLocation();
     const toogleModal = () => {
         setVisible(!visible);
     };
 
     useEffect(() => {
-        // console.log(search);
-        const search = window.location.search; 
-        const template_id = search ? getParam(search, '?template_id=', 1) : 1;
+        const template_id = search && search.includes('template_id=') ? getParam(search, '?template_id=', 1) : 1;
         console.log(template_id);
         getTvTemplates(dispatch, template_id);
     }, []);
@@ -37,7 +35,7 @@ const RedactorPriceContent = () => {
             </div>
 
             <div className='media-content'>
-                {products ? products.map(media => { 
+                {products ? products.map(media => {
                     return <Drag
                         key={media.id}
                         dataItem={media}

@@ -27,10 +27,11 @@ const VideosPlayer = () => {
     useLayoutEffect(() => {
         const _videos = document.getElementsByClassName('video-frame');
         setVideos(_videos);
-        setVideoDuration(_videos[0].duration);
-        if (videos && videos[0].currentTime > 2) {
-            clearInterval(timer);
-        }
+        console.log(_videos);
+        // setVideoDuration(_videos[0].duration);
+        // if (videos && videos[0].currentTime > 2) {
+        //     clearInterval(timer);
+        // }
     });
     // function clickedBar(e){
     //     if(!myMovie.paused && !myMovie.ended){
@@ -73,7 +74,7 @@ const VideosPlayer = () => {
         // status = true;
         // saveVideo(dispatch, getState);
     };
-    if(rows) {
+    if (rows) {
         console.log(23456);
         console.log(rows);
         // for(let i = 0; i < rows.length; i++) {
@@ -82,7 +83,7 @@ const VideosPlayer = () => {
         //         setSelectedRow(i + 1)
         //     }, 1000);
         // }
-        status = false; 
+        status = false;
     }
 
 

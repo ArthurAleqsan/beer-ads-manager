@@ -15,22 +15,25 @@ const ShopSelector = () => {
     const history = useHistory();
     const { shops, selectedShop } = useSelector(s => s.global, shallowEqual);
     const hasSearchState = search.includes('shop=');
+    const templateId = search && search.includes('template_id=') ? getParam(search, '?template_id=', 1) : 1;
     const dispatch = useDispatch();
 
     if (!selectedShop && shops) {
+        
         if (hasSearchState) {
             const shop = shops.find(s => s.id == getParam(search, 'shop=', 1));
             dispatch(setStoreValue('selectedShop', shop));
-            getProducts(dispatch, shop.id);
+            getProducts(dispatch, shop.id, templateId);
             
         } else {
-            getProducts(dispatch, shops[0].id);
+            getProducts(dispatch, shops[0].id, templateId);
             dispatch(setStoreValue('selectedShop', shops[0]));
         }
     }
     const handleChange = (v) => {
         const shop = shops.find(s => s.id == v);
         dispatch(setStoreValue('selectedShop', shop));
+        getProducts(dispatch, shop.id, templateId);
         history.push(`/?shop=${v}`);
     }
     return (

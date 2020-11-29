@@ -46,14 +46,14 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/list-tvtemplate', options }, true);
     }
-    getShops() {
-        const options = {
-            method: 'POST',
-            body: JSON.stringify({ TvtemplateSearch: { id: 1 } })
-        };
-        return this.send({ path: '/list-shop', options }, true);
-    }
-    getProductsForShop(id, tvtemplate = 1) {
+    // getShops() {
+    //     const options = {
+    //         method: 'POST',
+    //         body: JSON.stringify({ TvtemplateSearch: { id: [1] } })
+    //     };
+    //     return this.send({ path: '/list-shop', options }, true);
+    // }
+    getProductsForShop(id, tvtemplate) {
         const options = {
             method: 'POST',
             body: JSON.stringify({ shop: [id], tvtemplate })

@@ -14,7 +14,7 @@ const VideoRedactor = () => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        getShops(dispatch);
+        getShops(dispatch, 1);
     }, []);
 
     return (<div className='video-redactor-container'>

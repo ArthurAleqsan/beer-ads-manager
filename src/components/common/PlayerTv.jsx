@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { PUBLIC_PATH } from '../../util/conf';
 
 const PlayerTv = ({ count, name, id, media }) => {
-    let body
+    let body;
+    let iframeContent = "<video className='video-frame' ><source src='/assets/images/fake/v.mp4' /></video>"
     switch (count) {
         case 1:
             body = <div className='single-tv-player-container'>
@@ -31,9 +32,18 @@ const PlayerTv = ({ count, name, id, media }) => {
             body = <div className={`tv-player-container small-containers container-${id}`}>
                 <div className='tv-player'>
                     {media ? <img src={`${PUBLIC_PATH}/${media.image}`} className='video-frame' /> :
-                        <video className='video-frame'>
-                            <source src='/assets/images/fake/v.mp4' />
-                        </video>}
+                        // <video className='video-frame'>
+                        //     <source src='/assets/images/fake/v.mp4' />
+                        // </video>
+                        <iframe
+                            className='video-player-frame'
+                            sandbox='allow-same-origin'
+                            frameBorder="0"
+                            // id='iframe_id'
+                            srcDoc={iframeContent}
+
+                        />
+                    }
                     <div className='name-container'>
                         <span>{name}</span>
                     </div>
