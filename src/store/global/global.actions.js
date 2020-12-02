@@ -125,6 +125,24 @@ export const getProducts = (dispatch, id, tvtemplate) => {
             }
         });
 }
+export const addProductsToScreens = (data, tvtemplate = 1) => {
+    const screens = [];
+    const products = [];
+    for (let key in data) {
+        if(key == 'product_0') {
+            continue;
+        } else {
+            const screenNum = +getParam(key, 'product_', 1);
+            for(let i = 0; i < data[key].length; i++) {
+                screens.push(screenNum);
+                products.push(data[key][i].id);
+            }
+        }
+    }
+    VideoServices.addProductsToScreens({screen: screens, product: products}, tvtemplate)
+    .then(r => console.log(r))
+    // console.log({screen: screens, product: products, tvtemplate});
+}
 export const uploadMedia = (dispatch, getState, media) => {
     const form = new FormData();
     const { images } = getState().global;

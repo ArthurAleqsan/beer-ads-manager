@@ -9,6 +9,7 @@ import ShopSelector from '../common/ShopSelector';
 import ScheduleColHeader from '../common/schedule/ScheduleColHeader';
 import ScheduleItem from '../common/schedule/ScheduleItem';
 import { reorder, move } from './helpers';
+import { addProductsToScreens } from '../../store/global/global.actions';
 
 const EditPriceContentPopup = ({ visible, handleCancel }) => {
     const { tvCount, selectedShop, products } = useSelector(s => s.global, shallowEqual);
@@ -39,7 +40,8 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
         handleCancel();
     };
     const handlSave = () => {
-        console.log('saved');
+        addProductsToScreens(product);
+        // console.log(product);
     };
     const canSave = true;
 

@@ -61,6 +61,13 @@ app.use(
     })
 );
 app.use(
+    '/video/add-producttotemplate',
+    createProxyMiddleware({
+        target: API,
+        changeOrigin: true
+    })
+);
+app.use(
     '/video/list-temlatetoshops',
     createProxyMiddleware({
         target: API,
