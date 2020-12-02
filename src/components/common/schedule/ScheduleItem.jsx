@@ -4,7 +4,7 @@ import { Checkbox } from 'antd';
 import { PUBLIC_PATH } from '../../../util/conf';
 
 const ScheduleItem = ({ item }) => {
-    const { id, imgText, name, price, hasDiscount, image } = item;
+    const { id, imgText, name, price, hasDiscount, image, productid } = item;
     const options = [
         { label: 'Apple', value: 'Apple' },
         { label: 'Pear', value: 'Pear' },
@@ -16,7 +16,7 @@ const ScheduleItem = ({ item }) => {
         <div className='schedule-item-container'>
             <div className='id-container'>
                 <img src='/assets/images/icons/list.svg' />
-                <span>{id}</span>
+                <span>{productid}</span>
             </div>
             <div className='image-container'>
                 <img src={`${PUBLIC_PATH}/upload/product/${image}`} className='item-url' />
