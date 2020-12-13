@@ -1,10 +1,10 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Select } from 'antd';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch, useStore } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { getParam } from '../../util/helpers';
-import { getProducts, setStoreValue } from '../../store/global/global.actions';
+import { getPricesToTemplate, getProducts, setStoreValue } from '../../store/global/global.actions';
 import { ASSETS_PATH } from '../../util/conf';
 
 const { Option } = Select;
@@ -12,28 +12,34 @@ const { Option } = Select;
 
 const ShopSelector = () => {
     const { search } = useLocation();
+    const { getState } = useStore();
     const history = useHistory();
     const { shops, selectedShop } = useSelector(s => s.global, shallowEqual);
     const hasSearchState = search.includes('shop=');
-    const templateId = search && search.includes('template_id=') ? getParam(search, '?template_id=', 1) : 1;
+
+    const templateId = getState().global.template_id;
+    
     const dispatch = useDispatch();
 
     if (!selectedShop && shops) {
-        
+
         if (hasSearchState) {
             const shop = shops.find(s => s.id == getParam(search, 'shop=', 1));
             dispatch(setStoreValue('selectedShop', shop));
-            getProducts(dispatch, shop.id, templateId);
-            
+            getPricesToTemplate(dispatch, shop.id, templateId);
+            // getProducts(dispatch, shop.id, templateId);
+
         } else {
-            getProducts(dispatch, shops[0].id, templateId);
+            getPricesToTemplate(dispatch, shops.id, templateId);
+            // getProducts(dispatch, shops[0].id, templateId);
             dispatch(setStoreValue('selectedShop', shops[0]));
         }
     }
     const handleChange = (v) => {
         const shop = shops.find(s => s.id == v);
         dispatch(setStoreValue('selectedShop', shop));
-        getProducts(dispatch, shop.id, templateId);
+        getPricesToTemplate(dispatch, shop.id, templateId);
+        // getProducts(dispatch, shop.id, templateId);
         history.push(`/?shop=${v}`);
     }
     return (

@@ -60,6 +60,13 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/list-product', options }, true);
     }
+    getProductsForShopToTemplate(id, tvtemplate) {
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({ shop: [id], tvtemplate })
+        };
+        return this.send({ path: '/list-producttotemplate', options }, true);
+    }
     addProductsToScreens(data, tvtemplate) {
         const { screen, product } = data
         const options = {

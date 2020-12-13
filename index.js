@@ -68,6 +68,13 @@ app.use(
     })
 );
 app.use(
+    '/video/list-producttotemplate',
+    createProxyMiddleware({
+        target: API,
+        changeOrigin: true
+    })
+);
+app.use(
     '/video/list-temlatetoshops',
     createProxyMiddleware({
         target: API,

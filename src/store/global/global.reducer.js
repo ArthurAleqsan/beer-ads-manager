@@ -9,6 +9,7 @@ const initialState = {
     tvTemplate: null,
     shops: null,
     products: null,
+    prices: null,
     selectedShop: null,
     generatedVideo: null,
 };
@@ -55,6 +56,11 @@ const globalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: action.products,
+            }
+        case types.GET_SUCCESS_PRICES:
+            return {
+                ...state,
+                prices: action.prices,
             }
         default:
             return state

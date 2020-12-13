@@ -6,7 +6,7 @@ import Drag from './D_D/Drag';
 import MediaContainer from './MediaContainer';
 import ShopSelector from './ShopSelector';
 import EditPriceContentPopup from '../popups/EditPriceContentPopup';
-import { getTvTemplates } from '../../store/global/global.actions';
+import { getTvTemplates, setStoreValue } from '../../store/global/global.actions';
 import Product from './Product';
 import { useLocation } from 'react-router-dom';
 import { getParam } from '../../util/helpers';
@@ -22,10 +22,12 @@ const RedactorPriceContent = () => {
 
     useEffect(() => {
         const template_id = search && search.includes('template_id=') ? getParam(search, '?template_id=', 1) : 1;
-        console.log(template_id);
+        dispatch(setStoreValue('template_id', template_id));
         getTvTemplates(dispatch, template_id);
     }, []);
-    const { products } = useSelector(s => s.global, shallowEqual);
+    const { prices } = useSelector(s => s.global, shallowEqual);
+
+    console.log(prices);
 
     return (
         <div className='price-container-content redactor-content'>
@@ -35,7 +37,7 @@ const RedactorPriceContent = () => {
             </div>
 
             <div className='media-content'>
-                {products ? products.map(media => {
+                {prices ? prices.map(media => {
                     return <Drag
                         key={media.id}
                         dataItem={media}

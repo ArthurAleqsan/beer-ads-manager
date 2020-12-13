@@ -125,7 +125,22 @@ export const getProducts = (dispatch, id, tvtemplate) => {
             }
         });
 }
-export const addProductsToScreens = (data, tvtemplate = 1) => {
+export const getPricesToTemplate = (dispatch, id, tvtemplate) => {
+    VideoServices.getProductsForShopToTemplate(id, tvtemplate)
+        .then(r => {
+            console.log(r)
+            if (r.json.ERR == 0) {
+                console.log(r.json)
+                dispatch({
+                    type: types.GET_SUCCESS_PRICES,
+                    prices: r.json.DATA.model,
+                })
+            } else {
+                return message.error(r.json.DATA.err_mess);
+            }
+        });
+}
+export const addProductsToScreens = (data, tvtemplate) => {
     const screens = [];
     const products = [];
     for (let key in data) {

@@ -29,7 +29,8 @@
     border-radius: 4px;
     height: 100px;
     .name-container {
+        display: flex;
+        flex-direction: column;
         text-align: center;
     }
-
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Row, Col, message } from 'antd';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 
 import RedactorHeader from '../common/RedactorHeader';
 import ShopSelector from '../common/ShopSelector';
@@ -16,6 +16,8 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
     const [localSelectedShop, setLocalSelectedShop] = useState(null);
     const [tvS, setTvS] = useState([]);
     const [product, setProduct] = useState(null);
+    const {getState} = useStore();
+    const templateId = getState().global.template_id;
     useEffect(() => {
         setLocalSelectedShop(selectedShop);
     }, []);
@@ -40,7 +42,7 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
         handleCancel();
     };
     const handlSave = () => {
-        addProductsToScreens(product);
+        addProductsToScreens(product, templateId);
         // console.log(product);
     };
     const canSave = true;

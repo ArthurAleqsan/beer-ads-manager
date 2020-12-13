@@ -20,7 +20,10 @@ const Product = ({ file }) => {
     };
     return (
         <div className='product media-file-container'>
-            <div className='name-container'>{file.name}</div>
+            <div className='name-container'>
+                <span>{file.product}</span>
+                <span>TV №{file.screen}</span>
+            </div>
             <RemoveBtn handleRemove={openRemoveModal} />
             <RemoveItemPopup
                 visible={visibility}
