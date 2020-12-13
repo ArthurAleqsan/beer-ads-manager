@@ -27,20 +27,7 @@ const VideosPlayer = () => {
     useLayoutEffect(() => {
         const _videos = document.getElementsByClassName('video-frame');
         setVideos(_videos);
-        console.log(_videos);
-        // setVideoDuration(_videos[0].duration);
-        // if (videos && videos[0].currentTime > 2) {
-        //     clearInterval(timer);
-        // }
     });
-    // function clickedBar(e){
-    //     if(!myMovie.paused && !myMovie.ended){
-    //         var mouseX=e.pageX-bar.offsetLeft;
-    //         var newtime=mouseX*myMovie.duration/barSize;
-    //         myMovie.currentTime=newtime;
-    //         progressBar.style.width=mouseX+'px';
-    //     }
-    // }
     const timer = () => {
         const c_t = Math.ceil(videos[0].currentTime);
         const dur = videos[0].duration;
@@ -71,18 +58,8 @@ const VideosPlayer = () => {
     let status = false;
     const handleGenerate = () => {
         generateVideo(dispatch, getState);
-        // status = true;
-        // saveVideo(dispatch, getState);
     };
     if (rows) {
-        console.log(23456);
-        console.log(rows);
-        // for(let i = 0; i < rows.length; i++) {
-        //     setTimeout(() => {
-        //         console.log(rows[i + 1]);
-        //         setSelectedRow(i + 1)
-        //     }, 1000);
-        // }
         status = false;
     }
 

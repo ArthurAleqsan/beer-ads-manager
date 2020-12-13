@@ -78,7 +78,6 @@ export const removeItem = (dispatch, getState, id, type) => {
         case 'image':
             VideoServices.removeImage(id)
                 .then(r => {
-                    console.log(r);
                     if (r.json.ERR == 0) {
                         const { images } = getState().global;
                         let newImages = [...images];
@@ -128,9 +127,7 @@ export const getProducts = (dispatch, id, tvtemplate) => {
 export const getPricesToTemplate = (dispatch, id, tvtemplate) => {
     VideoServices.getProductsForShopToTemplate(id, tvtemplate)
         .then(r => {
-            console.log(r)
             if (r.json.ERR == 0) {
-                console.log(r.json)
                 dispatch({
                     type: types.GET_SUCCESS_PRICES,
                     prices: r.json.DATA.model,
@@ -156,7 +153,6 @@ export const addProductsToScreens = (data, tvtemplate) => {
     }
     VideoServices.addProductsToScreens({screen: screens, product: products}, tvtemplate)
     .then(r => console.log(r))
-    // console.log({screen: screens, product: products, tvtemplate});
 }
 export const uploadMedia = (dispatch, getState, media) => {
     const form = new FormData();
@@ -194,7 +190,6 @@ export const generateVideo = (dispatch, getState) => {
         type: types.SET_GENERATED_VIDEO,
         generatedVideo
     })
-    console.log(rows)
 }
 
 export const saveVideo = (dispatch, getState) => {
@@ -221,7 +216,6 @@ export const saveVideo = (dispatch, getState) => {
 export const getTvTemplates = (dispatch, id) => {
     VideoServices.getTvTemplates(id)
         .then(r => {
-            console.log(r)
             if (r.json.ERR == 0) {
                 if (Object.keys(r.json.DATA.model.length == 1)) {
                     Object.keys(r.json.DATA.model).forEach(k => {
@@ -245,7 +239,6 @@ export const getShops = (dispatch, id) => {
         .then(r => {
             if (r.json.ERR == 0) {
                 const { shops } = r.json.DATA;
-                console.log('is data ', r.json.DATA)
                 dispatch({
                     type: types.GET_SUCCESS_SHOPS,
                     shops
@@ -257,5 +250,4 @@ export const getShops = (dispatch, id) => {
 };
 export const getShopTemplates = (dispatch, id) => {
     VideoServices.getShopsTemplatesList(id)
-        .then(r => console.log(r));
 }

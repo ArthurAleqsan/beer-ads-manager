@@ -24,7 +24,6 @@ const DropTarget = props => {
         if (droppedItem) {
             props.onItemDropped(droppedItem);
         }
-        console.log(droppedItem);
         changeItemToTimelineBox(dispatch, getState, droppedItem, id);
         setIsOver(false);
     };

@@ -8,7 +8,6 @@ const PlayerTv = ({ count, name, id, media }) => {
     useLayoutEffect(() => {
         const frames = document.getElementsByTagName('iframe');
         if (frames[0] && frames[0].contentDocument.body && frames[0].contentDocument.childNodes[0]) {
-            console.log(frames[0].contentWindow.document.getElementsByTagName('video')[0]);
             for (let i = 0; i < frames.length; i++) {
                 frames[i].contentDocument.childNodes[0].style.height = '100%';
                 frames[i].contentDocument.body.style.margin = '0';
@@ -44,7 +43,6 @@ const PlayerTv = ({ count, name, id, media }) => {
             </div>
             break;
         case 3:
-            console.log(media);
             body = <div className={`tv-player-container small-containers container-${id}`}>
                 <div className='tv-player'>
                     {media ? <img src={`${PUBLIC_PATH}/${media.image}`} className='video-frame' /> :

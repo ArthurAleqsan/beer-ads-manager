@@ -28,10 +28,10 @@ export const removeFromArray = (array, findFn) => {
 export const getParam = (str, separator, index) => str.split(separator)[index].split('&')[0];
 export const getTypeOfDroppedItem = (item) => {
     let type;
-    if (item.productid) {
-        type = 'product';
-    } else if (item.image) {
+    if (item.image) {
         type = 'image';
+    } else {
+        type = 'product';
     }
     return type;
 }

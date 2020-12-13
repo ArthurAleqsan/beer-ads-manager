@@ -27,11 +27,11 @@ const ShopSelector = () => {
             const shop = shops.find(s => s.id == getParam(search, 'shop=', 1));
             dispatch(setStoreValue('selectedShop', shop));
             getPricesToTemplate(dispatch, shop.id, templateId);
-            // getProducts(dispatch, shop.id, templateId);
+            getProducts(dispatch, shop.id, templateId);
 
         } else {
             getPricesToTemplate(dispatch, shops.id, templateId);
-            // getProducts(dispatch, shops[0].id, templateId);
+            getProducts(dispatch, shops[0].id, templateId);
             dispatch(setStoreValue('selectedShop', shops[0]));
         }
     }
@@ -39,7 +39,7 @@ const ShopSelector = () => {
         const shop = shops.find(s => s.id == v);
         dispatch(setStoreValue('selectedShop', shop));
         getPricesToTemplate(dispatch, shop.id, templateId);
-        // getProducts(dispatch, shop.id, templateId);
+        getProducts(dispatch, shop.id, templateId);
         history.push(`/?shop=${v}`);
     }
     return (

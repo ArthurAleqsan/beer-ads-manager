@@ -35,7 +35,6 @@ export default class ServerConnector {
         } else {
             form.append('file', data);
         }
-        console.log(form)
         return form;
     }
 

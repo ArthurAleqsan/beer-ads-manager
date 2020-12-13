@@ -9,17 +9,19 @@ import ShopSelector from '../common/ShopSelector';
 import ScheduleColHeader from '../common/schedule/ScheduleColHeader';
 import ScheduleItem from '../common/schedule/ScheduleItem';
 import { reorder, move } from './helpers';
-import { addProductsToScreens } from '../../store/global/global.actions';
+import { addProductsToScreens, getProducts } from '../../store/global/global.actions';
 
-const EditPriceContentPopup = ({ visible, handleCancel }) => {
+const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) => {
     const { tvCount, selectedShop, products } = useSelector(s => s.global, shallowEqual);
+    const dispatch = useDispatch();
     const [localSelectedShop, setLocalSelectedShop] = useState(null);
     const [tvS, setTvS] = useState([]);
     const [product, setProduct] = useState(null);
-    const {getState} = useStore();
-    const templateId = getState().global.template_id;
+    const { getState } = useStore();
+    // const templateId = getState().global.template_id;
     useEffect(() => {
-        setLocalSelectedShop(selectedShop);
+        setLocalSelectedShop(selectedShop);;
+        // getProducts(dispatch, selectedShop?.id, templateId);
     }, []);
     if (products && !product) {
         const _ = [];
@@ -43,13 +45,12 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
     };
     const handlSave = () => {
         addProductsToScreens(product, templateId);
-        // console.log(product);
     };
     const canSave = true;
 
     const handleDragEnd = (result) => {
         const { source, destination } = result;
-        
+
         // dropped outside the list
         if (!destination) {
             message.error('You dropped outside the list');
@@ -109,7 +110,7 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
                         />
                         <div className='schedule-items-container'>
                             <Droppable droppableId={`droppable-0`}>
-                                {(provided ) => (
+                                {(provided) => (
                                     <div
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}

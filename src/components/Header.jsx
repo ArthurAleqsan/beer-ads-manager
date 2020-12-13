@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
+import { useStore } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
+import { saveVideo } from '../store/global/global.actions';
 // import { ASSETS_PATH } from '../util/conf';
 // import VideoDownloadPopup from './popups/VideoDownloadPopup';
 
 const Header = () => {
     const dispatch = useDispatch();
+    const { getState } = useStore();
     const { canDownload } = useSelector(s => s.global);
     const [downloadModalVisible, setDownloadModalVisible] = useState(false);
     const handleSave = () => {
         console.log('saved');
+        saveVideo(dispatch, getState)
     };
     const handlDownload = () => {
-        console.log(7);
         setDownloadModalVisible(true);
+        // saveVideo(dispatch, getState)
+        // generateVideo()
     }
     return (
         <div className='recorder-header main-content'>

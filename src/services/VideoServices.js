@@ -63,7 +63,7 @@ class VideoServices extends Request {
     getProductsForShopToTemplate(id, tvtemplate) {
         const options = {
             method: 'POST',
-            body: JSON.stringify({ shop: [id], tvtemplate })
+            body: JSON.stringify({ ProducttotemplateSearch: { tvtemplate,  } })
         };
         return this.send({ path: '/list-producttotemplate', options }, true);
     }
