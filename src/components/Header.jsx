@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useStore } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveVideo } from '../store/global/global.actions';
+import SuccessPopup from './popups/SuccessPopup';
 // import { ASSETS_PATH } from '../util/conf';
 // import VideoDownloadPopup from './popups/VideoDownloadPopup';
 
@@ -10,10 +11,14 @@ const Header = () => {
     const { getState } = useStore();
     const { canDownload } = useSelector(s => s.global);
     const [downloadModalVisible, setDownloadModalVisible] = useState(false);
+    const [succesPopupVisible, setSuccesPopupVisible] = useState(false);
     const handleSave = () => {
-        console.log('saved');
-        saveVideo(dispatch, getState)
+        saveVideo(dispatch, getState);
+        setSuccesPopupVisible(true);
     };
+    const setSuccesPopupVisibility = () => {
+        setSuccesPopupVisible(false);
+    }
     const handlDownload = () => {
         setDownloadModalVisible(true);
         // saveVideo(dispatch, getState)
@@ -26,13 +31,17 @@ const Header = () => {
                 <span className='header-title'>Создать видео</span>
             </div>
             <div className='recorder-header-right-row'>
-                <button className='react-button save-btn' onClick={handleSave}>Сохранить</button>
+                <button className={`react-button save-btn ${canDownload ? '' : 'disabled-btn'}`} onClick={handleSave} disabled={!canDownload}>Сохранить</button>
                 <button
-                    className={`react-button download-btn yellow-btn ${canDownload ? '' : 'disabled-btn'}`}
+                    className={`react-button download-btn yellow-btn disabled-btn`}
                     onClick={handlDownload}
-                    disabled={!canDownload}
+                    
                 >Скачать</button>
             </div>
+            <SuccessPopup 
+                visible = {succesPopupVisible}
+                handleCancel = {setSuccesPopupVisibility}
+            />
             {/* <VideoDownloadPopup
                 visible={downloadModalVisible}
                 handleCancel={() => setDownloadModalVisible(false)}

@@ -34,7 +34,7 @@ $header-Height: 32px;
     font-weight: 500;
     font-size: 20px;
     line-height: 23px;
-    font-family: Roboto !important;
+    // font-family: Roboto !important;
 }
 .yellow-btn {
     background: $hero-yellow;
@@ -98,6 +98,27 @@ $header-Height: 32px;
         min-height: 48px;
         .ant-select-selection-item {
             line-height: 45px !important;
+        }
+    }
+}
+.success-popup-modal {
+    .modal-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 22px;
+        .first-span {
+            text-align: center;
+        }
+    }
+    .modal-footer {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        .yellow-btn {
+            width: 20%;
+            padding: 5px 20px;
         }
     }
 }

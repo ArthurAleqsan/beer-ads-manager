@@ -29,10 +29,10 @@ const VideosPlayer = () => {
         setVideos(_videos);
     });
     const timer = () => {
-        const c_t = Math.ceil(videos[0].currentTime);
-        const dur = videos[0].duration;
-        setActiveWidth(c_t / dur * 100 + '%');
-        setCurrentTime(c_t);
+        // const c_t = Math.ceil(videos[0].currentTime);
+        // const dur = videos[0].duration;
+        // setActiveWidth(c_t / dur * 100 + '%');
+        // setCurrentTime(c_t);
     }
     const setVideoCurrentTime = () => {
         setInterval(timer, 1000);
@@ -43,7 +43,7 @@ const VideosPlayer = () => {
         for (let i = 0; i < videos.length; i++) {
             videos[i].play();
         }
-        setVideoCurrentTime()
+        setVideoCurrentTime();
     };
 
     const pause_stop = (fromStop) => {

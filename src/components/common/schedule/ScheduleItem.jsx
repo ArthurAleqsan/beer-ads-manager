@@ -10,7 +10,7 @@ const ScheduleItem = ({ item }) => {
         { label: 'Pear', value: 'Pear' },
     ];
     const onChange = (checkedValues) => {
-        console.log('checked = ', checkedValues);
+        // console.log('checked = ', checkedValues);
     };
     return (
         <div className='schedule-item-container'>

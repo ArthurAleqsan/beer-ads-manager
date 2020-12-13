@@ -4,7 +4,7 @@ import RemoveBtn from './RemoveBtn';
 import { PUBLIC_PATH } from '../../util/conf';
 
 const DropedItem = ({ type, obj, handleRemove }) => {
-    const { image, name } = obj;
+    const { image, name, product, screen } = obj;
     let item;
     switch (type) {
         case 'image':
@@ -30,7 +30,8 @@ const DropedItem = ({ type, obj, handleRemove }) => {
         case 'product':
             item = <div className='media-droped-item'>
                 <div className='product-name-line'>
-                    <span>{name}</span>
+                    <span>{product}</span>
+                    <span>TV №{screen}</span>
                 </div>
                 <RemoveBtn handleRemove={handleRemove} />
             </div>

@@ -11,6 +11,12 @@ class VideoServices extends Request {
         };
         return this.send({ path: '/list-images', options }, true);
     }
+    getVideos() {
+        const options = {
+            method: 'POST',
+        };
+        return this.send({ path: '/list-video', options }, true);
+    }
     removeImage(id) {
         const options = {
             method: 'POST',
@@ -26,6 +32,7 @@ class VideoServices extends Request {
         return this.send({ path: '/delete-producttotemplate', options }, true);
     }
     uploadMedia(data) {
+        console.log(data)
         const options = {
             method: 'POST',
             body: data,

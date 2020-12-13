@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Upload, Spin, message } from 'antd';
 import MediaContainer from './MediaContainer';
 import Drag from './D_D/Drag';
-import { getImages, uploadMedia } from '../../store/global/global.actions';
+import { getImages, getVideos, uploadMedia } from '../../store/global/global.actions';
 import { useDispatch, useSelector, shallowEqual, useStore } from 'react-redux';
 
 const { Dragger } = Upload;
@@ -27,7 +27,7 @@ const RedactorMediaCondtent = ({ isImgType }) => {
 
     const { images } = useSelector(s => s.global, shallowEqual);
     useEffect(() => {
-        getImages(dispatch);
+        isImgType ? getImages(dispatch) : getVideos(dispatch);
     }, []);
 
     return (

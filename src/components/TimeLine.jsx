@@ -80,7 +80,7 @@ const TimeLine = () => {
                 <Col span={22} className='timeline-content'>
                     {screens_count.map((row, i) => <Row key={i} className='video-timeline' /*style={{ height: lineHeight }}*/ >
                         {videoContentRows && videoContentRows.map((r, j) => {
-                            console.log(videoContentRows);
+
                             if (!r.tv_s[i]) {
                                 return <DropTarget
                                     onItemDropped={itemDropped}

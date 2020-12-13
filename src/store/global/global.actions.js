@@ -73,6 +73,20 @@ export const getImages = (dispatch) => {
             }
         })
 };
+export const getVideos = (dispatch) => {
+    VideoServices.getVideos()
+        .then((r) => {
+            if (r.json.ERR == 0) {
+                const images = r.json.DATA.model;
+                dispatch({
+                    type: types.GET_SUCCESS_IMAGES,
+                    images,
+                });
+            } else {
+                return message.error(r.json.DATA.err_mess);
+            }
+        })
+};
 export const removeItem = (dispatch, getState, id, type) => {
     switch (type) {
         case 'image':
@@ -152,11 +166,12 @@ export const addProductsToScreens = (data, tvtemplate) => {
         }
     }
     VideoServices.addProductsToScreens({screen: screens, product: products}, tvtemplate)
-    .then(r => console.log(r))
+    // .then(r => console.log(r))
 }
 export const uploadMedia = (dispatch, getState, media) => {
     const form = new FormData();
     const { images } = getState().global;
+    console.log(media)
     form.append('imageFiles[]', media);
     form.append('video', 1)
     VideoServices.uploadMedia(form)
@@ -208,7 +223,7 @@ export const saveVideo = (dispatch, getState) => {
         for (let j = 0; j < rows.length; j++) {
             const raw = { name: "123", path: "none", slide: row[j], time: dur[j], screen: i + 1 };
             VideoServices.generateVideo(raw)
-                .then(r => console.log(r));
+                // .then(r => console.log(r));
         }
     }
 }

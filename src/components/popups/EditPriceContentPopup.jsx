@@ -45,6 +45,7 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
     };
     const handlSave = () => {
         addProductsToScreens(product, templateId);
+        handleCancel();
     };
     const canSave = true;
 
@@ -97,7 +98,7 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
                     </Col>
                 </Row>
                 <div className='shop-selector-container'>
-                    <ShopSelector />
+                    {/* <ShopSelector /> */}
                 </div>
             </div>
             <Row className={`modal-body multicol-content`}>

@@ -101,10 +101,11 @@
             }
         }
         .multicol-content {
-            justify-content: space-between;
+            // justify-content: space-between;
             .content-col {
                 max-width: 350px;
                 background-color: #fff;
+                margin-right: 10px;
             }
         }
         .modal-footer {
