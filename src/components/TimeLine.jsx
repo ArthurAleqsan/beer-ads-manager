@@ -9,7 +9,6 @@ import DropTarget from './common/D_D/DropTarget';
 import DropedItem from './common/DropedItem';
 import RemoveItemPopup from './popups/RemoveItemPopup';
 import { ASSETS_PATH } from '../util/conf';
-import { useLocation } from 'react-router-dom';
 
 
 const TimeLine = () => {
@@ -20,7 +19,7 @@ const TimeLine = () => {
     const [buttonLeftStyle, setButtonLeftStyle] = useState(-40);
     const [visibility, setVisibility] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
-    const { tvCount, videoContentRows, duration, selectedShop } = useSelector(s => s.global, shallowEqual);
+    const { tvCount, videoContentRows, duration } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
     const { getState } = useStore();
     for (let i = 0; i < tvCount; i++) {
@@ -31,16 +30,6 @@ const TimeLine = () => {
         dur: 60,
         id: 1,
     };
-    // let loc = useLocation();
-    // let idShop = loc.search.slice(loc.search.indexOf('=') + 1);
-    // useLayoutEffect(() => {
-    //     const o_H = contentRef.current.offsetHeight;
-    //     tvCount && setLineHeight(o_H / tvCount);
-    //     if (idShop) {
-    //          console.log(7);
-
-    //     }
-    // }, []);
     const handleAdd = () => {
         setButtonLeftStyle(buttonLeftStyle + 120);
         if (videoContentRows) {
