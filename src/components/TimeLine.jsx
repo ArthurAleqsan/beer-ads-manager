@@ -13,6 +13,7 @@ import { ASSETS_PATH } from '../util/conf';
 
 const TimeLine = () => {
     const screens_count = [];
+
     const contentRef = useRef();
     const [lineHeight, setLineHeight] = useState(190);
     const [buttonLeftStyle, setButtonLeftStyle] = useState(-40);
@@ -22,18 +23,13 @@ const TimeLine = () => {
     const dispatch = useDispatch();
     const { getState } = useStore();
     for (let i = 0; i < tvCount; i++) {
-        screens_count.push(`tv-${i+1}`);
+        screens_count.push(`tv-${i + 1}`);
     }
-    const contentRow = {
+    let contentRow = {
         tv_s: new Array(screens_count.length),
         dur: 60,
         id: 1,
     };
-    useLayoutEffect(() => {
-        const o_H = contentRef.current.offsetHeight;
-        tvCount && setLineHeight(o_H / tvCount);
-    });
-
     const handleAdd = () => {
         setButtonLeftStyle(buttonLeftStyle + 120);
         if (videoContentRows) {
@@ -114,10 +110,10 @@ const TimeLine = () => {
                     <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle }}>+ Добавить слайд</button>
                 </Col>
             </Row>
-            <RemoveItemPopup 
-                visible = {visibility}
-                handleCancel = {closeRemoveModal}
-                handleRemove = {handleRemoveItem}
+            <RemoveItemPopup
+                visible={visibility}
+                handleCancel={closeRemoveModal}
+                handleRemove={handleRemoveItem}
             />
         </div>
     )

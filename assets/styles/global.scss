@@ -3,6 +3,7 @@ $hero-yellow: #fbd436;
 $redactor-content-padding: 5px;
 $BT-Width: 150px;
 $BT-Height: 48px;
+$header-Height: 32px;
 
 :root {
     --BG_Color: #{$BG_Color};
@@ -33,7 +34,7 @@ $BT-Height: 48px;
     font-weight: 500;
     font-size: 20px;
     line-height: 23px;
-    font-family: Roboto!important;
+    font-family: Roboto !important;
 }
 .yellow-btn {
     background: $hero-yellow;

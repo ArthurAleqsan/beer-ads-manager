@@ -30,7 +30,7 @@ const ScheduleItem = ({ item }) => {
             <div className='price-container'>
                 <span>{price} ₽</span>
             </div>
-            <div className='discount-container' style={{ visibility: hasDiscount ? 'visible' : 'hidden' }}>
+            <div className='discount-container' >
                 <Checkbox.Group options={options} defaultValue={[]} onChange={onChange} />
             </div>
         </div>
