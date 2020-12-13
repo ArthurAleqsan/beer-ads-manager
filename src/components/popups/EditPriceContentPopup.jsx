@@ -80,7 +80,7 @@ const EditPriceContentPopup = ({ visible, handleCancel }) => {
             maskClosable={true}
             onCancel={handleCancel}
         >
-            <div className='modal-header'>
+            <div className='price-modal-header'>
                 <Row>
                     <Col span={12}>
                         <RedactorHeader />

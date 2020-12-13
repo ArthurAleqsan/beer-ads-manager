@@ -9,31 +9,38 @@ import DropTarget from './common/D_D/DropTarget';
 import DropedItem from './common/DropedItem';
 import RemoveItemPopup from './popups/RemoveItemPopup';
 import { ASSETS_PATH } from '../util/conf';
+import { useLocation } from 'react-router-dom';
 
 
 const TimeLine = () => {
     const screens_count = [];
+
     const contentRef = useRef();
     const [lineHeight, setLineHeight] = useState(190);
     const [buttonLeftStyle, setButtonLeftStyle] = useState(-40);
     const [visibility, setVisibility] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
-    const { tvCount, videoContentRows, duration } = useSelector(s => s.global, shallowEqual);
+    const { tvCount, videoContentRows, duration, selectedShop } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
     const { getState } = useStore();
     for (let i = 0; i < tvCount; i++) {
-        screens_count.push(`tv-${i+1}`);
+        screens_count.push(`tv-${i + 1}`);
     }
-    const contentRow = {
+    let contentRow = {
         tv_s: new Array(screens_count.length),
         dur: 60,
         id: 1,
     };
-    useLayoutEffect(() => {
-        const o_H = contentRef.current.offsetHeight;
-        tvCount && setLineHeight(o_H / tvCount);
-    });
+    // let loc = useLocation();
+    // let idShop = loc.search.slice(loc.search.indexOf('=') + 1);
+    // useLayoutEffect(() => {
+    //     const o_H = contentRef.current.offsetHeight;
+    //     tvCount && setLineHeight(o_H / tvCount);
+    //     if (idShop) {
+    //          console.log(7);
 
+    //     }
+    // }, []);
     const handleAdd = () => {
         setButtonLeftStyle(buttonLeftStyle + 120);
         if (videoContentRows) {
@@ -113,10 +120,10 @@ const TimeLine = () => {
                     <button className='blue-dashed' onClick={handleAdd} style={{ left: buttonLeftStyle }}>+ Добавить слайд</button>
                 </Col>
             </Row>
-            <RemoveItemPopup 
-                visible = {visibility}
-                handleCancel = {closeRemoveModal}
-                handleRemove = {handleRemoveItem}
+            <RemoveItemPopup
+                visible={visibility}
+                handleCancel={closeRemoveModal}
+                handleRemove={handleRemoveItem}
             />
         </div>
     )
