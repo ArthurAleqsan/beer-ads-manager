@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useSelector, shallowEqual, useDispatch, useStore } from 'react-redux';
 
 import RedactorHeader from '../common/RedactorHeader';
-import ShopSelector from '../common/ShopSelector';
+// import ShopSelector from '../common/ShopSelector';
 import ScheduleColHeader from '../common/schedule/ScheduleColHeader';
 import ScheduleItem from '../common/schedule/ScheduleItem';
 import { reorder, move } from './helpers';
@@ -20,7 +20,7 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
     const { getState } = useStore();
     // const templateId = getState().global.template_id;
     useEffect(() => {
-        setLocalSelectedShop(selectedShop);;
+        setLocalSelectedShop(selectedShop);
         // getProducts(dispatch, selectedShop?.id, templateId);
     }, []);
     if (products && !product) {
@@ -51,6 +51,8 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
 
     const handleDragEnd = (result) => {
         const { source, destination } = result;
+
+        console.log(result);
 
         // dropped outside the list
         if (!destination) {

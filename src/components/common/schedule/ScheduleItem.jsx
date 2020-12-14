@@ -31,7 +31,7 @@ const ScheduleItem = ({ item }) => {
                 <span>{price} ₽</span>
             </div>
             <div className='discount-container' >
-                <Checkbox.Group options={options} defaultValue={[]} onChange={onChange} />
+                {/* <Checkbox.Group options={options} defaultValue={[]} onChange={onChange} /> */}
             </div>
         </div>
     )
