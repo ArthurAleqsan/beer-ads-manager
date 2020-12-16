@@ -60,8 +60,6 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
     const handleDragEnd = (result) => {
         const { source, destination } = result;
 
-        console.log(result);
-
         // dropped outside the list
         if (!destination) {
             message.error('You dropped outside the list');

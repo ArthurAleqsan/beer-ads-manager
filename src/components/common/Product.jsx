@@ -11,6 +11,7 @@ const Product = ({ file }) => {
     const { getState } = useStore();
     const handleRemove = () => {
         removeItem(dispatch, getState, file.id, 'product');
+        closeRemoveModal()
     };
     const openRemoveModal = () => {
         setVisibility(true);

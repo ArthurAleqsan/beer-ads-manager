@@ -32,7 +32,6 @@ class VideoServices extends Request {
         return this.send({ path: '/delete-producttotemplate', options }, true);
     }
     uploadMedia(data) {
-        console.log(data)
         const options = {
             method: 'POST',
             body: data,

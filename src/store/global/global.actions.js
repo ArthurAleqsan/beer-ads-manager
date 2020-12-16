@@ -111,12 +111,12 @@ export const removeItem = (dispatch, getState, id, type) => {
             VideoServices.removeProduct(id)
                 .then(r => {
                     if (r.json.ERR == 0) {
-                        const { products } = getState().global;
-                        let newProducts = [...products];
+                        const { prices } = getState().global;
+                        let newProducts = [...prices];
                         newProducts = removeFromArray(newProducts, product => product.id == id);
                         dispatch({
-                            type: types.GET_SUCCESS_PRODUCTS,
-                            products: newProducts,
+                            type: types.GET_SUCCESS_PRICES,
+                            prices: newProducts,
                         });
                     } else {
                         return message.error(r.json.DATA.err_mess);
