@@ -142,31 +142,36 @@ export const getPricesToTemplate = (dispatch, id, tvtemplate) => {
     VideoServices.getProductsForShopToTemplate(id, tvtemplate)
         .then(r => {
             if (r.json.ERR == 0) {
+                const prices = r.json.DATA.model;
+                console.log(prices)
                 dispatch({
                     type: types.GET_SUCCESS_PRICES,
-                    prices: r.json.DATA.model,
+                    prices,
                 })
             } else {
                 return message.error(r.json.DATA.err_mess);
             }
         });
 }
-export const addProductsToScreens = (data, tvtemplate) => {
-    const screens = [];
-    const products = [];
+export const addProductsToScreens = (dispatch, shopId, data, tvtemplate) => {
     for (let key in data) {
-        if(key == 'product_0') {
+        if (key == 'product_0') {
             continue;
         } else {
             const screenNum = +getParam(key, 'product_', 1);
-            for(let i = 0; i < data[key].length; i++) {
-                screens.push(screenNum);
+            const products = [];
+            for (let i = 0; i < data[key].length; i++) {
                 products.push(data[key][i].id);
             }
+            if (products.length != 0 && screenNum != 3) {
+                VideoServices.addProductsToScreens({ screen: [screenNum], product: products }, tvtemplate)
+            } else {
+                VideoServices.addProductsToScreens({ screen: [screenNum], product: products }, tvtemplate)
+                    .then(() => getPricesToTemplate(dispatch, shopId, tvtemplate))
+            }
+
         }
     }
-    VideoServices.addProductsToScreens({screen: screens, product: products}, tvtemplate)
-    // .then(r => console.log(r))
 }
 export const uploadMedia = (dispatch, getState, media) => {
     const form = new FormData();
@@ -223,7 +228,7 @@ export const saveVideo = (dispatch, getState) => {
         for (let j = 0; j < rows.length; j++) {
             const raw = { name: "123", path: "none", slide: row[j], time: dur[j], screen: i + 1 };
             VideoServices.generateVideo(raw)
-                // .then(r => console.log(r));
+            // .then(r => console.log(r));
         }
     }
 }

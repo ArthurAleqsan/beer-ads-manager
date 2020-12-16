@@ -23,8 +23,16 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
         setLocalSelectedShop(selectedShop);
         // getProducts(dispatch, selectedShop?.id, templateId);
     }, []);
+    // console.log(products);
     if (products && !product) {
-        const _ = [];
+        const _ = []
+        // products.map(p => {
+        //     if(p.screen) {
+        //         console.log(p.screen);
+        //     } else {
+        //         console.log(p);
+        //     }
+        // })
         const obj = {
             product_0: products.filter(p => p.screen == null),
         }
@@ -44,7 +52,7 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
         handleCancel();
     };
     const handlSave = () => {
-        addProductsToScreens(product, templateId);
+        addProductsToScreens(dispatch, shopId, product, templateId);
         handleCancel();
     };
     const canSave = true;
