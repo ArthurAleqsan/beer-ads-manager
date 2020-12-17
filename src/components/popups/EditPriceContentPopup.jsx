@@ -9,16 +9,15 @@ import RedactorHeader from '../common/RedactorHeader';
 import ScheduleColHeader from '../common/schedule/ScheduleColHeader';
 import ScheduleItem from '../common/schedule/ScheduleItem';
 import { reorder, move } from './helpers';
-import { addProductsToScreens, getProducts } from '../../store/global/global.actions';
+import { addProductsToScreens, getProducts, setStoreValue } from '../../store/global/global.actions';
 
 const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) => {
-    const { tvCount, selectedShop, products } = useSelector(s => s.global, shallowEqual);
+    const { tvCount, selectedShop, products, prices } = useSelector(s => s.global, shallowEqual);
     const dispatch = useDispatch();
     const [localSelectedShop, setLocalSelectedShop] = useState(null);
     const [tvS, setTvS] = useState([]);
     const [product, setProduct] = useState(null);
-    const { getState } = useStore();
-    // const templateId = getState().global.template_id;
+
     useEffect(() => {
         setLocalSelectedShop(selectedShop);
         // getProducts(dispatch, selectedShop?.id, templateId);
@@ -38,7 +37,7 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
         }
         for (let i = 1; i < tvCount + 1; i++) {
             _.push(`TV-${i}`);
-            obj[`product_${i}`] = products.filter(p => p.screen == i);
+            obj[`product_${i}`] = [];
         }
         setTvS(_);
         setProduct(obj);
@@ -52,6 +51,21 @@ const EditPriceContentPopup = ({ visible, handleCancel, shopId, templateId }) =>
         handleCancel();
     };
     const handlSave = () => {
+        if (prices) {
+            for (let i = 1; i < tvCount; i++) {
+                const restoredPrices = [];
+                prices.forEach(p => {
+                    if (p.screen == i) {
+                        restoredPrices.push({ productid: p.product });
+                    }
+                })
+                product[`product_${i}`].push(...restoredPrices)
+            }
+        }
+        if (product[`product_${0}`].length == 0) {
+            dispatch(setStoreValue('canCreate', false))
+        }
+        console.log(prices);
         addProductsToScreens(dispatch, shopId, product, templateId);
         handleCancel();
     };

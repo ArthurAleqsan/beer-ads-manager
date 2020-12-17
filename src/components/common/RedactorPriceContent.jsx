@@ -14,14 +14,14 @@ import { getParam } from '../../util/helpers';
 
 const RedactorPriceContent = () => {
     const [visible, setVisible] = useState(false);
-    const { getState } = useStore;
+    const { getState } = useStore();
     const dispatch = useDispatch();
     const { search } = useLocation();
     const toogleModal = () => {
         setVisible(!visible);
     };
     const template_id = search && search.includes('template_id=') ? getParam(search, '?template_id=', 1) : 1;
-    // const templateId = getState().global.template_id
+    const { canCreate } = getState().global;
 
     useEffect(() => {
         dispatch(setStoreValue('template_id', template_id));
@@ -32,7 +32,9 @@ const RedactorPriceContent = () => {
 
     return (
         <div className='price-container-content redactor-content'>
-            <button className='yellow-btn react-button' onClick={toogleModal}>Редактировать прайс</button>
+            <button className={`yellow-btn react-button ${!canCreate ? 'disabled-btn' : ''}`} 
+            onClick={toogleModal} 
+            disabled={!canCreate}>Создать прайс</button>
             <div className='shop-selector-container'>
                 <ShopSelector />
             </div>
@@ -48,7 +50,7 @@ const RedactorPriceContent = () => {
             <EditPriceContentPopup
                 visible={visible}
                 handleCancel={toogleModal}
-                templateId = {template_id}
+                templateId={template_id}
             />
         </div>
     )

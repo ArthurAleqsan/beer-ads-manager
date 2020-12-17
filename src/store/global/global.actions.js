@@ -154,6 +154,7 @@ export const getPricesToTemplate = (dispatch, id, tvtemplate) => {
         });
 }
 export const addProductsToScreens = (dispatch, shopId, data, tvtemplate) => {
+    console.log(data)
     for (let key in data) {
         if (key == 'product_0') {
             continue;
@@ -161,12 +162,13 @@ export const addProductsToScreens = (dispatch, shopId, data, tvtemplate) => {
             const screenNum = +getParam(key, 'product_', 1);
             const products = [];
             for (let i = 0; i < data[key].length; i++) {
-                products.push(data[key][i].id);
+                products.push(data[key][i].productid);
             }
+            const screenNumArr = products.map(() => screenNum)
             if (products.length != 0 && screenNum != 3) {
-                VideoServices.addProductsToScreens({ screen: [screenNum], product: products }, tvtemplate)
+                VideoServices.addProductsToScreens({ screen: screenNumArr, product: products }, tvtemplate)
             } else {
-                VideoServices.addProductsToScreens({ screen: [screenNum], product: products }, tvtemplate)
+                VideoServices.addProductsToScreens({ screen: screenNumArr, product: products }, tvtemplate)
                     .then(() => getPricesToTemplate(dispatch, shopId, tvtemplate))
             }
 

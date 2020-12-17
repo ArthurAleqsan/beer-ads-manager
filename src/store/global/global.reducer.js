@@ -12,6 +12,7 @@ const initialState = {
     prices: null,
     selectedShop: null,
     generatedVideo: null,
+    canCreate: true,
 };
 
 const globalReducer = (state = initialState, action) => {
